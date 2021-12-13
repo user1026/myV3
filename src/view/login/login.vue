@@ -19,26 +19,21 @@
           <el-form-item label="密码">
             <el-input v-model="FormData.password" type="password"></el-input>
           </el-form-item>
+          <el-form-item>
+            <el-checkbox v-model="remember" label="记住账号密码"></el-checkbox>
+          </el-form-item>
         </template>
         <template v-else>
           <el-form-item label="手机号">
             <el-input v-model="FormData.username"></el-input>
           </el-form-item>
           <el-form-item label="验证码">
-            <el-input
-              v-model="FormData.password"
-              type="password"
-              style="width: 60%"
-            ></el-input>
+            <el-input v-model="FormData.password" type="password" style="width: 60%"></el-input>
             <template v-if="!hascode">
-              <el-button @click="getcode" type="primary" style="width: 39%"
-                >获取验证码</el-button
-              >
+              <el-button @click="getcode" type="primary" style="width: 39%">获取验证码</el-button>
             </template>
             <template v-else>
-              <el-button :disabled="hascode" type="primary"
-                >还剩{{ time }}秒</el-button
-              >
+              <el-button :disabled="hascode" type="primary">还剩{{ time }}秒</el-button>
             </template>
           </el-form-item>
         </template>
@@ -53,10 +48,21 @@
   </div>
 </template>
     <script setup>
-import { ref, reactive, onMounted, computed } from "vue";
+import { ref, reactive, onMounted, computed, watch } from "vue";
+import { post } from "@/utils/http.js"
 const FormData = reactive({});
 const time = ref(10);
 const typecode = ref(1);
+const remember = ref(false);
+watch(remember, (newval, oldval) => {
+  if (newval === true) {
+    if (FormData.username && FormData.password) {
+      //window.localStorage.setItem()
+    }
+  } else {
+
+  }
+})
 const type1 = computed(() => {
   return typecode.value == 1 ? "typecss" : "";
 });
@@ -78,8 +84,12 @@ const getcode = () => {
     }
   }, 1000);
 };
-const submit = () => {};
-const rest = () => {};
+const submit = () => {
+  post("http://localhost:5000/a").then(res => {
+    console.log(res)
+  })
+};
+const rest = () => { };
 </script>
 <style lang="scss" scoped>
 .login {
@@ -103,7 +113,8 @@ const rest = () => {};
     background-color: rgba($color: white, $alpha: 0.1);
     padding: 50px;
     border-radius: 20px;
-    :deep(.el-form-item__label) {
+    :deep(.el-form-item__label),
+    :deep(.el-checkbox__label) {
       color: white;
     }
     .logintype {
