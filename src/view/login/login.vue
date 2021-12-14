@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    <div class="loginform">
+    <div :class="`${loginclass}`">
       <el-form :data="FormData">
         <el-form-item>
           <h2>登 录</h2>
@@ -47,91 +47,115 @@
     </div>
   </div>
 </template>
-    <script setup>
-import { ref, reactive, onMounted, computed, watch } from "vue";
-import { post } from "@/utils/http.js"
-const FormData = reactive({});
-const time = ref(10);
-const typecode = ref(1);
-const remember = ref(false);
-watch(remember, (newval, oldval) => {
-  if (newval === true) {
-    if (FormData.username && FormData.password) {
-      //window.localStorage.setItem()
-    }
-  } else {
+<script setup>
+  import {
+    ref,
+    reactive,
+    onMounted,
+    computed,
+    watch
+  } from "vue";
+  import {
+    post
+  } from "@/utils/http.js"
+  const FormData = reactive({});
+  const time = ref(10);
+  const typecode = ref(1);
+  const remember = ref(false);
+  watch(remember, (newval, oldval) => {
+    if (newval === true) {
+      if (FormData.username && FormData.password) {
+        //window.localStorage.setItem()
+      }
+    } else {
 
-  }
-})
-const type1 = computed(() => {
-  return typecode.value == 1 ? "typecss" : "";
-});
-const type2 = computed(() => {
-  return typecode.value == 1 ? "" : "typecss";
-});
-const hascode = ref(false);
-const logintype = (code) => {
-  typecode.value = code;
-};
-const getcode = () => {
-  hascode.value = true;
-  let timer = setInterval(() => {
-    time.value--;
-    if (time.value == 0) {
-      hascode.value = false;
-      clearInterval(timer);
-      time.value = 60;
     }
-  }, 1000);
-};
-const submit = () => {
-  post("http://localhost:5000/a").then(res => {
-    console.log(res)
   })
-};
-const rest = () => { };
+  let width=ref(1400)
+  const loginclass=computed(()=>{
+    return width.value<1400?"loginform loginform1400":"loginform"
+  })
+  onMounted(()=>{
+    width.value=document.documentElement.offsetWidth
+  })
+  const type1 = computed(() => {
+    return typecode.value == 1 ? "typecss" : "";
+  });
+  const type2 = computed(() => {
+    return typecode.value == 1 ? "" : "typecss";
+  });
+  const hascode = ref(false);
+  const logintype = (code) => {
+    typecode.value = code;
+  };
+  const getcode = () => {
+    hascode.value = true;
+    let timer = setInterval(() => {
+      time.value--;
+      if (time.value == 0) {
+        hascode.value = false;
+        clearInterval(timer);
+        time.value = 60;
+      }
+    }, 1000);
+  };
+  const submit = () => {
+    post("http://localhost:5000/a").then(res => {
+      console.log(res)
+    })
+  };
+  const rest = () => {};
 </script>
 <style lang="scss" scoped>
-.login {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background: url("@/assets/images/login.jpeg") no-repeat;
-  // background-size: 100% 100%;
-  h2 {
-    text-align: center;
-    font: bolder 24px/24px "微软雅黑";
-    color: white;
-  }
-  .loginform {
-    width: 25%;
-    height: 45%;
+  .login {
+    width: 100%;
+    height: 100%;
     position: absolute;
-    left: 80%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba($color: white, $alpha: 0.1);
-    padding: 50px;
-    border-radius: 20px;
-    :deep(.el-form-item__label),
-    :deep(.el-checkbox__label) {
+    background: url("@/assets/images/login.jpeg") no-repeat;
+    background-size: 100% 100%;
+    h2 {
+      text-align: center;
+      font: bolder 24px/24px "微软雅黑";
       color: white;
     }
-    .logintype {
-      display: flex;
-      justify-content: space-around;
-      font: bolder 18px/18px "微软雅黑";
-      color: white;
-      margin: 20px 0;
+
+    .loginform {
+      width: 25%;
+      height: 45%;
+      position: absolute;
+      left: 80%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba($color: white, $alpha: 0.1);
+      padding: 50px;
+      border-radius: 20px;
+      :deep(.el-form-item__label),
+      :deep(.el-checkbox__label) {
+        color: white;
+      }
+      .logintype {
+        display: flex;
+        justify-content: space-around;
+        font: bolder 18px/18px "微软雅黑";
+        color: white;
+        margin: 20px 0;
+      }
+
+      .button {
+        display: flex;
+        justify-content: center;
+      }
     }
-    .button {
-      display: flex;
-      justify-content: center;
-    }
+ .loginform1400 {
+      width: 35%;
+      height: 70%;
+      padding: 20px 50px;
+   }
   }
-}
-.typecss {
-  border-bottom: 2px solid greenyellow;
-  color: greenyellow;
-}
+  
+
+  .typecss {
+    border-bottom: 2px solid greenyellow;
+    color: greenyellow;
+  }
 </style>
