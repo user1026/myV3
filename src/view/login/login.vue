@@ -1,7 +1,8 @@
 <template>
   <div class="login">
+    <h1>通用模板</h1>
     <div :class="`${loginclass}`">
-      <el-form :data="FormData">
+      <el-form :model="FormData" ref="ruleForm">
         <el-form-item>
           <h2>登 录</h2>
         </el-form-item>
@@ -13,10 +14,10 @@
           </div>
         </el-form-item>
         <template v-if="typecode == 1">
-          <el-form-item label="账号">
+          <el-form-item label="账号" prop="username">
             <el-input v-model="FormData.username"></el-input>
           </el-form-item>
-          <el-form-item label="密码">
+          <el-form-item label="密码" prop="password">
             <el-input v-model="FormData.password" type="password"></el-input>
           </el-form-item>
           <el-form-item>
@@ -24,11 +25,11 @@
           </el-form-item>
         </template>
         <template v-else>
-          <el-form-item label="手机号">
-            <el-input v-model="FormData.username"></el-input>
+          <el-form-item label="手机号" prop="userphone">
+            <el-input v-model="FormData.userphone"></el-input>
           </el-form-item>
-          <el-form-item label="验证码">
-            <el-input v-model="FormData.password" type="password" style="width: 60%"></el-input>
+          <el-form-item label="验证码" prop="code">
+            <el-input v-model="FormData.code"  style="width: 60%"></el-input>
             <template v-if="!hascode">
               <el-button @click="getcode" type="primary" style="width: 39%">获取验证码</el-button>
             </template>
@@ -58,8 +59,17 @@
   import {
     post
   } from "@/utils/http.js"
-  const FormData = reactive({});
-  const time = ref(10);
+  import userinfo from "./userinfo"
+  import getCode  from "./getcode";
+  const {submit,setuserinfo,getuserinfo}=userinfo();
+  const {hascode,time,getcode} =getCode();
+  const ruleForm=ref(null)
+  const FormData = reactive({
+    userphone:"",
+    username:"",
+    code:"",
+    password:"",
+  });
   const typecode = ref(1);
   const remember = ref(false);
   watch(remember, (newval, oldval) => {
@@ -84,27 +94,13 @@
   const type2 = computed(() => {
     return typecode.value == 1 ? "" : "typecss";
   });
-  const hascode = ref(false);
   const logintype = (code) => {
     typecode.value = code;
   };
-  const getcode = () => {
-    hascode.value = true;
-    let timer = setInterval(() => {
-      time.value--;
-      if (time.value == 0) {
-        hascode.value = false;
-        clearInterval(timer);
-        time.value = 60;
-      }
-    }, 1000);
+  
+  const rest = () => {
+  ruleForm.value.resetFields();
   };
-  const submit = () => {
-    post("http://localhost:5000/a").then(res => {
-      console.log(res)
-    })
-  };
-  const rest = () => {};
 </script>
 <style lang="scss" scoped>
   .login {
@@ -113,6 +109,12 @@
     position: absolute;
     background: url("@/assets/images/login.jpeg") no-repeat;
     background-size: 100% 100%;
+    h1{
+       font: bolder 28px/28px "微软雅黑";
+       text-align: center;
+       color: white;
+       margin-top: 20px;
+    }
     h2 {
       text-align: center;
       font: bolder 24px/24px "微软雅黑";

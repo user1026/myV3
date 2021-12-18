@@ -1,11 +1,17 @@
-const userinfo=(FormData,bool)=>{
-    const submit=()=>{};
+import {get,post} from "@/utils/http.js"
+const userinfo=()=>{
+    const submit=(FormData,type)=>{
+        post().then(res=>{
+
+        })
+    };
+    //记住密码功能
     const setuserinfo=(FormData)=>{
-         let t=new Date();
-         document.cookie=FormData.username+"="+FormData.password;
+        
     };
     const getuserinfo=()=>{
-
+        return {}
     };
     return {submit,setuserinfo,getuserinfo}
 }
+export default userinfo
