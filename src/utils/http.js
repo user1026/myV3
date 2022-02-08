@@ -3,11 +3,14 @@ import {
     ElMessage
 } from 'element-plus'
 const http = axios.create({
+    baseURL: "http://localhost:9000",
     timeout: 10000
 })
 
 http.interceptors.request.use(request => {
-
+    // request.headers = {
+    //     "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+    // }
     return request;
 }, error => {
 
