@@ -34,7 +34,7 @@
               <el-button @click="getcode" type="primary" style="width: 39%">获取验证码</el-button>
             </template>
             <template v-else>
-              <el-button :disabled="hascode" type="primary">还剩{{ time }}秒</el-button>
+              <el-button :disabled="hascode" type="primary">还剩[[time]] 秒</el-button>
             </template>
           </el-form-item>
         </template>
@@ -96,9 +96,9 @@ const login = () => {
   console.log(FormDatas.username, FormDatas.password)
   f.append("username", FormDatas.username)
   f.append("password", FormDatas.password)
-  f.append("id", 123)
+  FormDatas.id = 1234
   console.log(f)
-  submit(f)
+  submit(FormDatas)
 }
 const rest = () => {
   ruleForm.value.resetFields();
@@ -109,7 +109,7 @@ const rest = () => {
   width: 100%;
   height: 100%;
   position: absolute;
-  background: url("../../assets/images/login.jpeg") no-repeat;
+  background: url(../../assets/images/login.jpeg) no-repeat;
   background-size: 100% 100%;
   h1 {
     font: bolder 28px/28px "微软雅黑";
