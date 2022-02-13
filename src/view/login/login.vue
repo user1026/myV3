@@ -92,12 +92,8 @@ const logintype = (code) => {
 };
 
 const login = () => {
-  let f = new FormData();
-  console.log(FormDatas.username, FormDatas.password)
-  f.append("username", FormDatas.username)
-  f.append("password", FormDatas.password)
+
   FormDatas.id = 1234
-  console.log(f)
   submit(FormDatas)
 }
 const rest = () => {

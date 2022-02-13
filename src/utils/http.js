@@ -3,7 +3,7 @@ import {
     ElMessage
 } from 'element-plus'
 const http = axios.create({
-    baseURL: "http://localhost:9000",
+    baseURL: process.env.BASE_URL,
     timeout: 10000
 })
 
@@ -11,6 +11,7 @@ http.interceptors.request.use(request => {
     // request.headers = {
     //     "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
     // }
+    request.headers.Authorization = window.sessionStorage.getItem("token");
     return request;
 }, error => {
 
