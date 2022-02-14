@@ -13,6 +13,7 @@ const userinfo = () => {
             if (res.data.code == 200) {
                 window.sessionStorage.setItem("token", res.data.token);
                 userToken.setToken(res.data.token)
+                getuserinfo(res.data.token)
             }
         })
     };
@@ -20,13 +21,24 @@ const userinfo = () => {
     const setuserinfo = (FormDatas) => {
 
     };
-    const getuserinfo = () => {
-        return {}
+    const getuserinfo = (token) => {
+        post("/getuserinfo", {
+            token
+        }).then(res => {
+            console.log(res)
+        })
+        return res.data
     };
+    const add = () => {
+        post("/add").then(res => {
+            console.log(res.data)
+        })
+    }
     return {
         submit,
         setuserinfo,
-        getuserinfo
+        getuserinfo,
+        add
     }
 }
 export default userinfo

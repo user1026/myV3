@@ -41,7 +41,7 @@
         <el-form-item>
           <div class="button">
             <el-button type="success" @click="login">登 录</el-button>
-            <el-button @click="rest">取 消</el-button>
+            <el-button @click="add">取 消</el-button>
           </div>
         </el-form-item>
       </el-form>
@@ -53,7 +53,7 @@ import { computed, onMounted, reactive, ref, watch } from "vue";
 import userinfo from "./userinfo"
 import getCode from "./getcode";
 
-const { submit, setuserinfo, getuserinfo } = userinfo();
+const { submit, add, setuserinfo, getuserinfo } = userinfo();
 const { hascode, time, getcode } = getCode();
 const ruleForm = ref(null)
 const FormDatas = reactive({
@@ -79,6 +79,7 @@ const loginclass = computed(() => {
 })
 onMounted(() => {
   width.value = document.documentElement.offsetWidth
+  add();
 })
 const type1 = computed(() => {
   return typecode.value == 1 ? "typecss" : "";
