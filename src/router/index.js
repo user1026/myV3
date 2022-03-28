@@ -13,7 +13,11 @@ const routes = [{
     },
     {
         path: "/index",
-        component: () => import("@/view/index.vue")
+        component: () => import("@/view/index.vue"),
+        children:[{
+            path:"/:pathMatch(.*)",
+            redirect:"/index"
+        }]
     },
 ];
 export const router = createRouter({
