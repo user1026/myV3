@@ -30,9 +30,7 @@ const userinfo = () => {
         return res.data
     };
     const add = () => {
-        post("/add").then(res => {
-            console.log(res.data)
-        })
+
     }
     return {
         submit,

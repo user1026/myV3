@@ -52,7 +52,7 @@
 import { computed, onMounted, reactive, ref, watch } from "vue";
 import userinfo from "./userinfo"
 import getCode from "./getcode";
-
+import { useRouter } from "vue-router"
 const { submit, add, setuserinfo, getuserinfo } = userinfo();
 const { hascode, time, getcode } = getCode();
 const ruleForm = ref(null)
@@ -62,6 +62,7 @@ const FormDatas = reactive({
   code: "",
   password: "",
 });
+const router = useRouter();
 const typecode = ref(1);
 const remember = ref(false);
 watch(remember, (newval, oldval) => {
@@ -93,9 +94,12 @@ const logintype = (code) => {
 };
 
 const login = () => {
+  router.push({
+    path: "/index",
+  })
+  // FormDatas.id = 1234
+  // submit(FormDatas)
 
-  FormDatas.id = 1234
-  submit(FormDatas)
 }
 const rest = () => {
   ruleForm.value.resetFields();
