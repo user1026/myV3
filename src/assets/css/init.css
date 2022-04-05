@@ -32,6 +32,7 @@ html,
 body {
     min-width: 100%;
     min-height: 100%;
+    position: relative;
 }
 
 body {
@@ -124,4 +125,9 @@ textarea {
     display: inline-block;
     *display: inline;
     *zoom: 1;
+}
+#app{
+    position: relative;
+    width: 100%;
+    height: 100%;
 }

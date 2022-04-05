@@ -95,7 +95,7 @@ const logintype = (code) => {
 
 const login = () => {
   router.push({
-    path: "/index",
+    path: "/",
   })
   // FormDatas.id = 1234
   // submit(FormDatas)
@@ -110,7 +110,7 @@ const rest = () => {
   width: 100%;
   height: 100%;
   position: absolute;
-  background: url(../../assets/images/login.jpeg) no-repeat;
+  background: url(../../../assets/images/login.jpeg) no-repeat;
   background-size: 100% 100%;
   h1 {
     font: bolder 28px/28px "微软雅黑";
