@@ -1,47 +1,45 @@
 <script setup>
-import { ref, reactive, onMounted, watch } from 'vue'
+    import {
+        ref,
+        reactive,
+        onMounted,
+        defineProps,
+        defineEmits,
+    } from 'vue'
+    const emit = defineEmits(["chaddtabs"])
+    const isCollapse = ref(true);
+    const menuList = reactive([{
+            path: "/one",
 
-const isCollapse = ref(true);
-const menuList = reactive([
-    {
-        path: "/one",
+        },
+        {
+            path: "/two",
+        }
+    ])
+    const handleOpen = () => {
 
-    },
-    {
-        path: "/two",
     }
-])
-const handleOpen = () => {
-    console.log(111111)
-}
-const handleClose = () => {
+    const handleClose = () => {
 
-}
-const addtabs = (path) => {
+    }
+    const addtabs = (path) => {
+        emit("chaddtabs", path);
+    }
+    const expandMenu = () => {
+        isCollapse.value = !isCollapse.value
 
-}
-const expandMenu = () => {
-    isCollapse.value = !isCollapse.value
-}
-watch(() => {
-
-})
+    }
 </script>
 
 <template>
     <div class="menuIcon" @click="expandMenu">
         <el-icon>
             <expand />
-        </el-icon>xxx管理
+        </el-icon>
+        <p class="ptitle" v-if="!isCollapse">xxx管理</p>
     </div>
     <div id="menu">
-        <el-menu
-            @open="handleOpen"
-            default-active="/"
-            class="el-menu-vertical-demo"
-            :collapse="isCollapse"
-            router
-        >
+        <el-menu @open="handleOpen" default-active="/" class="el-menu-vertical-demo" :collapse="isCollapse" router>
             <el-menu-item index="/">
                 <template #title>
                     <div @click="addtabs('/home')">
@@ -57,10 +55,17 @@ watch(() => {
 </template>
 
 <style lang='scss' scoped>
-.menuIcon {
-    padding: 10px 40px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
+    .menuIcon {
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 60px;
+        font: normal 18px/60px "微软雅黑";
+
+        .ptitle {
+            width: 120px;
+            padding: 0 20px;
+        }
+    }
 </style>

@@ -8,10 +8,11 @@
 </template>
 
 <style lang="scss" scoped>
-#main {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
+  #main {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+  }
 </style>
-
