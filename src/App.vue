@@ -1,4 +1,9 @@
 <script setup>
+import { onMounted } from 'vue';
+onMounted(() => {
+  // document.getElementById("app").style.height = window.innerHeight + "px"
+  // console.log(document.getElementById("app").style.height, window.innerHeight)
+})
 </script>
 
 <template>
@@ -8,11 +13,11 @@
 </template>
 
 <style lang="scss" scoped>
-  #main {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: flex-start;
-  }
+#main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
 </style>

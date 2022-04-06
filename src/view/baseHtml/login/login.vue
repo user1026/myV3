@@ -109,7 +109,7 @@ const rest = () => {
 .login {
   width: 100%;
   height: 100%;
-  position: absolute;
+  position: relative;
   background: url(../../../assets/images/login.jpeg) no-repeat;
   background-size: 100% 100%;
   h1 {
