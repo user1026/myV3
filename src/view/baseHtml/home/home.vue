@@ -6,18 +6,18 @@
         watch
     } from "vue";
 
-    import leftmenu from "./leftMenu/index.vue"
+    import leftmenu from "./leftMenu/index.vue";
+    import rightmain from "./rightMain/index.vue"
     const left = ref(null);
     const right = ref(null);
     const leftWidth = ref(0);
     const addtabs = (path) => {
-        console.log(path)
+        right.value.addtabs(path)
     }
     onMounted(() => {
         leftWidth.value = document.getElementById("leftMenu").clientWidth;
     })
     watch(leftWidth, (newVal, oldVal) => {
-
         document.getElementById("rightMain").style.width = (document.body.clientWidth - oldVal) + "px";
         console.log(document.getElementById("rightMain").style.width, document.body.clientWidth, newVal, oldVal)
     })
@@ -25,11 +25,13 @@
 
 
 <template>
-    <div ref="left" id="leftMenu">
-        <leftmenu @chaddtabs="addtabs"></leftmenu>
+    <div id="leftMenu">
+        <leftmenu ref="left" @chaddtabs="addtabs"></leftmenu>
     </div>
 
-    <div ref="right" id="rightMain"></div>
+    <div id="rightMain">
+        <rightmain ref="right"></rightmain>
+    </div>
 </template>
 
 <style lang='scss' scoped>
@@ -42,6 +44,6 @@
     #rightMain {
 
         height: 100%;
-        background-color: aqua;
+
     }
 </style>

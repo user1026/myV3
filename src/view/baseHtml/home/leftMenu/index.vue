@@ -7,15 +7,20 @@
         defineEmits,
     } from 'vue'
     const emit = defineEmits(["chaddtabs"])
-    const isCollapse = ref(true);
+    const isCollapse = ref(false);
     const menuList = reactive([{
-            path: "/one",
-
-        },
-        {
-            path: "/two",
-        }
-    ])
+        path: "/",
+        title: "首页",
+        children: [{
+                path: "/one",
+                title: "one"
+            },
+            {
+                path: "/two",
+                title: "two"
+            }
+        ]
+    }])
     const handleOpen = () => {
 
     }
@@ -23,6 +28,7 @@
 
     }
     const addtabs = (path) => {
+        console.log("调用left")
         emit("chaddtabs", path);
     }
     const expandMenu = () => {
@@ -39,8 +45,9 @@
         <p class="ptitle" v-if="!isCollapse">xxx管理</p>
     </div>
     <div id="menu">
-        <el-menu @open="handleOpen" default-active="/" class="el-menu-vertical-demo" :collapse="isCollapse" router>
-            <el-menu-item index="/">
+        <el-menu @open="handleOpen" unique-opene default-active="/home" class="el-menu-vertical-demo"
+            :collapse="isCollapse" router>
+            <el-menu-item index="/home">
                 <template #title>
                     <div @click="addtabs('/home')">
                         <el-icon>
@@ -50,6 +57,23 @@
                     </div>
                 </template>
             </el-menu-item>
+            <el-sub-menu index="" v-for="item in menuList">
+                <template #title>
+                    {{item.name}}
+                </template>
+                <el-menu-item-group>
+                    <el-menu-item :index="chItem.path" v-for="chItem in item.children">
+                        <template #title>
+                            <div @click="addtabs(chItem.path)">
+                                <el-icon>
+                                    <home-filled />
+                                </el-icon>
+                                <span>{{chItem.title}}</span>
+                            </div>
+                        </template>
+                    </el-menu-item>
+                </el-menu-item-group>
+            </el-sub-menu>
         </el-menu>
     </div>
 </template>

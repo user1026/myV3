@@ -17,9 +17,26 @@ const routes = [{
     {
         path: "/",
         component: index,
-        meta: {
-            title: "首页"
-        }
+       
+        children:[{
+            path:"home",
+            component:()=>import("@/view/index/index.vue"),
+            meta:{
+                title:"首页"
+            }
+        },{
+            path:"one",
+            component:()=>import("@/view/index/one.vue"),
+            meta:{
+                title:"one"
+            }
+        },{
+            path:"two",
+            component:()=>import("@/view/index/two.vue"),
+            meta:{
+                title:"two"
+            }
+        }],
     },
     {
         path: "/404",
@@ -38,6 +55,6 @@ const router = createRouter({
     routes
 })
 router.beforeEach((to, from) => {
-    console.log(to, from)
+    // console.log(to, from)
 })
 export default router
