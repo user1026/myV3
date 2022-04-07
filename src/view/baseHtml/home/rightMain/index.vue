@@ -5,6 +5,10 @@
         onMounted,
         defineExpose
     } from 'vue'
+    import {
+        rightTabName
+    } from "@/store/index.js"
+    const tabname = rightTabName();
     const username = ref("123");
     const tabsValue = ref("1");
     const tabsList = reactive([{
@@ -16,7 +20,8 @@
         console.log(name)
     }
     const addtabs = (path) => {
-        console.log(path)
+        let tilte = tabname.getRouterName();
+        console.log(title, path)
     }
     defineExpose({
         addtabs: addtabs

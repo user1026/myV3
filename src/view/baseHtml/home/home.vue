@@ -7,7 +7,7 @@
     } from "vue";
 
     import leftmenu from "./leftMenu/index.vue";
-    import rightmain from "./rightMain/index.vue"
+    import rightmain from "./rightMain/index.vue";
     const left = ref(null);
     const right = ref(null);
     const leftWidth = ref(0);

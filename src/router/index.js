@@ -7,6 +7,7 @@ const index = () => import("@/view/baseHtml/home/home.vue");
 const page404 = () => import("@/view/baseHtml/404/404.vue");
 const login = () => import("@/view/baseHtml/login/login.vue");
 
+
 const routes = [{
         path: "/login",
         component: login,
@@ -54,7 +55,5 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes
 })
-router.beforeEach((to, from) => {
-    // console.log(to, from)
-})
+
 export default router
