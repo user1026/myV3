@@ -2,7 +2,9 @@ import {
     createRouter,
     createWebHashHistory
 } from 'vue-router';
-
+import {
+    rightTabName
+} from "@/store/index.js"
 const index = () => import("@/view/baseHtml/home/home.vue");
 const page404 = () => import("@/view/baseHtml/404/404.vue");
 const login = () => import("@/view/baseHtml/login/login.vue");
@@ -18,24 +20,24 @@ const routes = [{
     {
         path: "/",
         component: index,
-       
-        children:[{
-            path:"home",
-            component:()=>import("@/view/index/index.vue"),
-            meta:{
-                title:"首页"
+
+        children: [{
+            path: "home",
+            component: () => import("@/view/index/index.vue"),
+            meta: {
+                title: "首页"
             }
-        },{
-            path:"one",
-            component:()=>import("@/view/index/one.vue"),
-            meta:{
-                title:"one"
+        }, {
+            path: "one",
+            component: () => import("@/view/index/one.vue"),
+            meta: {
+                title: "one"
             }
-        },{
-            path:"two",
-            component:()=>import("@/view/index/two.vue"),
-            meta:{
-                title:"two"
+        }, {
+            path: "two",
+            component: () => import("@/view/index/two.vue"),
+            meta: {
+                title: "two"
             }
         }],
     },
@@ -56,4 +58,9 @@ const router = createRouter({
     routes
 })
 
+router.beforeEach((to, from) => {
+    const tabName = rightTabName();
+    tabName.setRouterName(to.meta.title)
+    console.log(to.meta.title)
+})
 export default router
