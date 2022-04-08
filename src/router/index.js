@@ -58,9 +58,16 @@ const router = createRouter({
     routes
 })
 
-router.beforeEach((to, from) => {
+router.beforeEach(async (to, from) => {
     const tabName = rightTabName();
     tabName.setRouterName(to.meta.title)
-    console.log(to.meta.title)
+    await tabName.getRouterName()
+    console.log(tabName.getRouterName(),"1111")
 })
+router.afterEach((to, from) => {
+    const tabName = rightTabName();
+    tabName.setRouterName(to.meta.title)
+   
+    console.log(tabName.getRouterName(),"2222")
+  })
 export default router

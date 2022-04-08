@@ -1,6 +1,7 @@
 import {
     defineStore
 } from "pinia"
+import {ref} from "vue"
 export const usestore = defineStore("userToken", () => {
     let token = "";
     
@@ -19,15 +20,15 @@ export const usestore = defineStore("userToken", () => {
     }
 })
 export const rightTabName=defineStore("tabName",()=>{
-    let routerName="";
+    let routerName=ref("1233");
     const setRouterName=(val)=>{
-        routerName=val;
+        routerName.value=val;
     }
     const getRouterName=()=>{
-        return routerName;
+        return routerName.value;
     }
     return {
-        routerName,
+        routerName:routerName.value,
         setRouterName,
         getRouterName
     }
