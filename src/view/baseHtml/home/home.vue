@@ -11,8 +11,8 @@
     const left = ref(null);
     const right = ref(null);
     const leftWidth = ref(0);
-    const addtabs = (path) => {
-        right.value.addtabs(path)
+    const addtabs = (title, path) => {
+        right.value.addtabs(title, path)
     }
     onMounted(() => {
         leftWidth.value = document.getElementById("leftMenu").clientWidth;

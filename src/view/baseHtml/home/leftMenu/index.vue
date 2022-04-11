@@ -27,8 +27,11 @@
     const handleClose = () => {
 
     }
-    const addtabs = (path) => {
-        emit("chaddtabs", path);
+    const addtabs = (title, path) => {
+        emit("chaddtabs",
+            title,
+            path
+        );
     }
     const expandMenu = () => {
         isCollapse.value = !isCollapse.value
@@ -48,7 +51,7 @@
             :collapse="isCollapse" router>
             <el-menu-item index="/home">
                 <template #title>
-                    <div @click="addtabs('/home')">
+                    <div @click="addtabs('首页','/home')">
                         <el-icon>
                             <home-filled />
                         </el-icon>
@@ -57,17 +60,18 @@
                 </template>
             </el-menu-item>
             <el-sub-menu index v-for="item in menuList">
-                <template #title>{{ item.name }}</template>
+                <template #title>{{ item.title }}</template>
                 <el-menu-item-group>
-                    <el-menu-item :index="chItem.path" v-for="chItem in item.children" @click="addtabs(chItem.path)">
-                        <!-- <template #title> -->
-                        <div>
-                            <el-icon>
-                                <home-filled />
-                            </el-icon>
-                            <span>{{ chItem.title }}</span>
-                        </div>
-                        <!-- </template> -->
+                    <el-menu-item :index="chItem.path" v-for="chItem in item.children"
+                        @click="addtabs(chItem.title,chItem.path)">
+                        <template #title>
+                            <div>
+                                <el-icon>
+                                    <home-filled />
+                                </el-icon>
+                                <span>{{ chItem.title }}</span>
+                            </div>
+                        </template>
                     </el-menu-item>
                 </el-menu-item-group>
             </el-sub-menu>
@@ -85,8 +89,8 @@
         font: normal 18px/60px "微软雅黑";
 
         .ptitle {
-            width: 120px;
-            padding: 0 20px;
+            width: 145px;
+            padding: 0 30px 0 20px;
         }
     }
 </style>
