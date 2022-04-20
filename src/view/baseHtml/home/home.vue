@@ -14,12 +14,15 @@
     const addtabs = (title, path) => {
         right.value.addtabs(title, path)
     }
+    const leftMenuPath = (path) => {
+        left.value.leftMenuPath(path)
+    }
     onMounted(() => {
         leftWidth.value = document.getElementById("leftMenu").clientWidth;
     })
     watch(leftWidth, (newVal, oldVal) => {
         document.getElementById("rightMain").style.width = (document.body.clientWidth - oldVal) + "px";
-        console.log(document.getElementById("rightMain").style.width, document.body.clientWidth, newVal, oldVal)
+        // console.log(document.getElementById("rightMain").style.width, document.body.clientWidth, newVal, oldVal)
     })
 </script>
 
@@ -30,7 +33,7 @@
     </div>
 
     <div id="rightMain">
-        <rightmain ref="right"></rightmain>
+        <rightmain ref="right" @leftMenuPath="leftMenuPath"></rightmain>
     </div>
 </template>
 

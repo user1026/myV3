@@ -3,11 +3,11 @@
         ref,
         reactive,
         onMounted,
-        defineProps,
-        defineEmits,
+
     } from 'vue'
     const emit = defineEmits(["chaddtabs"])
     const isCollapse = ref(false);
+    const defaultPath = ref("/home");
     const menuList = reactive([{
         path: "/",
         title: "首页",
@@ -37,6 +37,13 @@
         isCollapse.value = !isCollapse.value
 
     }
+    const leftMenuPath = (path) => {
+        defaultPath.value = path;
+        console.log(path)
+    }
+    defineExpose({
+        leftMenuPath,
+    })
 </script>
 
 <template>
@@ -47,7 +54,7 @@
         <p class="ptitle" v-if="!isCollapse">xxx管理</p>
     </div>
     <div id="menu">
-        <el-menu @open="handleOpen" unique-opene default-active="/home" class="el-menu-vertical-demo"
+        <el-menu @open="handleOpen" unique-opene :default-active="defaultPath" class="el-menu-vertical-demo"
             :collapse="isCollapse" router>
             <el-menu-item index="/home">
                 <template #title>

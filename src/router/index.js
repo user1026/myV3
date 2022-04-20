@@ -62,7 +62,7 @@ router.beforeEach(async (to, from) => {
     const tabName = rightTabName();
     tabName.setRouterName(to.meta.title)
 
-    console.log("pinia在前置路由中title值:" + tabName.getRouterName())
+    // console.log("pinia在前置路由中title值:" + tabName.getRouterName())
 })
 router.afterEach((to, from) => {
     const tabName = rightTabName();

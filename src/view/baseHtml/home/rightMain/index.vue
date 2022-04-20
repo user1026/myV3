@@ -3,7 +3,6 @@
         ref,
         reactive,
         onMounted,
-        defineExpose,
         onBeforeUpdate,
     } from 'vue'
     import {
@@ -35,15 +34,22 @@
                 name: "1",
                 title: "首页"
             })
-            tabIndex.value = "1"
-            router.push('/home')
+            tabIndex.value = "1";
+            leftMenuIndex("/home");
+            router.push('/home');
         } else {
             const tab = tabsList.value;
             tabsList.value = tab.filter(val => val.name != name);
             tabsValue.value = tabsList.value[tabsList.value.length - 1].name;
             tabIndex.value = Number(tabsList.value[tabsList.value.length - 1].name);
+            leftMenuIndex(tabsList.value[tabsList.value.length - 1].path);
             router.push(tabsList.value[tabsList.value.length - 1].path)
         }
+    }
+    const emit = defineEmits(["leftMenuPath"])
+    const leftMenuIndex = (path) => {
+
+        emit("leftMenuPath", path);
     }
     onMounted(() => {
 
