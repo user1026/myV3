@@ -12,7 +12,7 @@
     import {
         rightTabName
     } from "@/store/index.js"
-    const tabname = rightTabName();
+    const tabName = rightTabName();
     const router = useRouter();
     const username = ref("123");
     const tabsValue = ref("1");
@@ -55,10 +55,13 @@
 
     })
     const addtabs = (title, path) => {
-        console.log(title)
+
+        console.log(tabName.getRouterName, "title")
         let fList = tabsList.value.filter(val => val.title == title);
+        console.log(fList)
         if (fList.length > 0) {
             tabsValue.value = fList[0].name;
+            console.log(fList[0].name)
             return;
         } else {
             tabIndex.value += 1;

@@ -3,11 +3,18 @@
         ref,
         reactive,
         onMounted,
-
+        toRaw
     } from 'vue'
     const emit = defineEmits(["chaddtabs"])
     const isCollapse = ref(false);
     const defaultPath = ref("/home");
+    let sum = ref(0);
+
+    const show = () => {
+        const sum = toRaw(sum)
+        console.log(sum);
+    }
+
     const menuList = reactive([{
         path: "/",
         title: "首页",
@@ -56,14 +63,14 @@
     <div id="menu">
         <el-menu @open="handleOpen" unique-opene :default-active="defaultPath" class="el-menu-vertical-demo"
             :collapse="isCollapse" router>
-            <el-menu-item index="/home">
+            <el-menu-item index="/home" @click="addtabs('首页','/home')">
                 <template #title>
-                    <div @click="addtabs('首页','/home')">
-                        <el-icon>
-                            <home-filled />
-                        </el-icon>
-                        <span>首页</span>
-                    </div>
+
+                    <el-icon>
+                        <home-filled />
+                    </el-icon>
+                    <span>首页</span>
+
                 </template>
             </el-menu-item>
             <el-sub-menu index v-for="item in menuList">
