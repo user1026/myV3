@@ -1,12 +1,18 @@
 <script setup>
-import { ref, reactive, defineExpose, defineEmits, onMounted } from "vue"
+import { ref, reactive, onMounted } from "vue"
 import {
     rightTabName
 } from "@/store/index.js"
+import {
+    useRoute,
+    useRouter
+} from 'vue-router';
 const tabname = rightTabName();
+const router = useRouter();
+const routes = useRoute();
 const emit = defineEmits(["backRouterName"])
 onMounted(() => {
-
+    console.log(router, routes)
 })
 </script>
 <template>

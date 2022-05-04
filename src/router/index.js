@@ -22,24 +22,26 @@ const routes = [{
         component: index,
 
         children: [{
-            path: "home",
-            component: () => import("@/view/index/index.vue"),
-            meta: {
-                title: "首页"
-            }
-        }, {
-            path: "one",
-            component: () => import("@/view/index/one.vue"),
-            meta: {
-                title: "one"
-            }
-        }, {
-            path: "two",
-            component: () => import("@/view/index/two.vue"),
-            meta: {
-                title: "two"
-            }
-        }],
+                path: "home",
+                component: () => import("@/view/index/index.vue"),
+                meta: {
+                    title: "首页"
+                }
+            },
+            //{
+            //     path: "one",
+            //     component: () => import("@/view/index/one.vue"),
+            //     meta: {
+            //         title: "one"
+            //     }
+            // }, {
+            //     path: "two",
+            //     component: () => import("@/view/index/two.vue"),
+            //     meta: {
+            //         title: "two"
+            //     }
+            // }
+        ],
     },
     {
         path: "/404",

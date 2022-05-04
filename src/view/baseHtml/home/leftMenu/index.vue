@@ -1,42 +1,40 @@
 <script setup>
-    import {
-        ref,
-        reactive,
-        onMounted,
-        defineProps,
-        defineEmits,
-    } from 'vue'
-    const emit = defineEmits(["chaddtabs"])
-    const isCollapse = ref(false);
-    const menuList = reactive([{
-        path: "/",
-        title: "首页",
-        children: [{
-                path: "/one",
-                title: "one"
-            },
-            {
-                path: "/two",
-                title: "two"
-            }
-        ]
-    }])
-    const handleOpen = () => {
+import {
+    ref,
+    reactive,
+    onMounted,
+} from 'vue'
+const emit = defineEmits(["chaddtabs"])
+const isCollapse = ref(false);
+const menuList = reactive([{
+    path: "/",
+    title: "首页",
+    children: [{
+        path: "/one",
+        title: "one"
+    },
+    {
+        path: "/two",
+        title: "two"
+    }
+    ]
+}])
+const handleOpen = () => {
 
-    }
-    const handleClose = () => {
+}
+const handleClose = () => {
 
-    }
-    const addtabs = (title, path) => {
-        emit("chaddtabs",
-            title,
-            path
-        );
-    }
-    const expandMenu = () => {
-        isCollapse.value = !isCollapse.value
+}
+const addtabs = (title, path) => {
+    emit("chaddtabs",
+        title,
+        path
+    );
+}
+const expandMenu = () => {
+    isCollapse.value = !isCollapse.value;
 
-    }
+}
 </script>
 
 <template>
@@ -51,7 +49,7 @@
             :collapse="isCollapse" router>
             <el-menu-item index="/home">
                 <template #title>
-                    <div @click="addtabs('首页','/home')">
+                    <div @click="addtabs('首页', '/home')">
                         <el-icon>
                             <home-filled />
                         </el-icon>
@@ -63,7 +61,7 @@
                 <template #title>{{ item.title }}</template>
                 <el-menu-item-group>
                     <el-menu-item :index="chItem.path" v-for="chItem in item.children"
-                        @click="addtabs(chItem.title,chItem.path)">
+                        @click="addtabs(chItem.title, chItem.path)">
                         <template #title>
                             <div>
                                 <el-icon>
@@ -80,17 +78,18 @@
 </template>
 
 <style lang='scss' scoped>
-    .menuIcon {
-        padding: 10px 20px;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        height: 60px;
-        font: normal 18px/60px "微软雅黑";
+.menuIcon {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 60px;
+    font: normal 18px/60px "微软雅黑";
 
-        .ptitle {
-            width: 145px;
-            padding: 0 30px 0 20px;
-        }
+
+    .ptitle {
+        width: 145px;
+        padding: 0 30px 0 20px;
     }
+}
 </style>
