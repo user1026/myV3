@@ -60,16 +60,10 @@ const router = createRouter({
     routes
 })
 
-router.beforeEach(async (to, from) => {
+router.beforeEach((to, from) => {
     const tabName = rightTabName();
     tabName.setRouterName(to.meta.title)
 
-    console.log("pinia在前置路由中title值:" + tabName.getRouterName())
-})
-router.afterEach((to, from) => {
-    const tabName = rightTabName();
-    tabName.setRouterName(to.meta.title)
-
-
+     console.log("pinia在前置路由中title值:" + tabName.getRouterName)
 })
 export default router

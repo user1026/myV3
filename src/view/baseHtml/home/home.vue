@@ -5,14 +5,14 @@ import {
     onMounted,
     watch
 } from "vue";
-import {useRoute,useRouter} from "vue-router"
+import { useRoute, useRouter } from "vue-router"
 import leftmenu from "./leftMenu/index.vue";
 import rightmain from "./rightMain/index.vue";
 const left = ref(null);
 const right = ref(null);
 const username = ref("123")
 const leftWidth = ref("300px");
-const router=useRouter();
+const router = useRouter();
 const addtabs = (title, path) => {
     right.value.addtabs(title, path)
 }
@@ -22,7 +22,7 @@ const getLeftWidth = (width) => {
 }
 onMounted(() => {
     // leftWidth.value = document.getElementById("leftMenu").clientWidth + "px";
-   
+
 })
 watch(leftWidth, (newVal, oldVal) => {
     // document.getElementById("rightMain").style.width = (document.body.clientWidth - parseInt(oldVal)) + "px";
