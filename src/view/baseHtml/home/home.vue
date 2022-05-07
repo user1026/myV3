@@ -1,33 +1,36 @@
 <script setup>
-import {
-    ref,
-    reactive,
-    onMounted,
-    watch
-} from "vue";
-import { useRoute, useRouter } from "vue-router"
-import leftmenu from "./leftMenu/index.vue";
-import rightmain from "./rightMain/index.vue";
-const left = ref(null);
-const right = ref(null);
-const username = ref("123")
-const leftWidth = ref("300px");
-const router = useRouter();
-const addtabs = (title, path) => {
-    right.value.addtabs(title, path)
-}
-const getLeftWidth = (width) => {
-    // console.log(width)
-    // leftWidth.value = width + "px";
-}
-onMounted(() => {
-    // leftWidth.value = document.getElementById("leftMenu").clientWidth + "px";
+    import {
+        ref,
+        reactive,
+        onMounted,
+        watch
+    } from "vue";
+    import {
+        useRoute,
+        useRouter
+    } from "vue-router"
+    import leftmenu from "./leftMenu/index.vue";
+    import rightmain from "./rightMain/index.vue";
+    const left = ref(null);
+    const right = ref(null);
+    const username = ref("123")
+    const leftWidth = ref("300px");
+    const router = useRouter();
+    const addtabs = (title, path) => {
+        right.value.addtabs(title, path)
+    }
+    const getLeftWidth = (width) => {
+        // console.log(width)
+        // leftWidth.value = width + "px";
+    }
+    onMounted(() => {
+        // leftWidth.value = document.getElementById("leftMenu").clientWidth + "px";
 
-})
-watch(leftWidth, (newVal, oldVal) => {
-    // document.getElementById("rightMain").style.width = (document.body.clientWidth - parseInt(oldVal)) + "px";
-    // console.log(document.getElementById("rightMain").style.width, document.body.clientWidth, newVal, oldVal)
-})
+    })
+    watch(leftWidth, (newVal, oldVal) => {
+        // document.getElementById("rightMain").style.width = (document.body.clientWidth - parseInt(oldVal)) + "px";
+        // console.log(document.getElementById("rightMain").style.width, document.body.clientWidth, newVal, oldVal)
+    })
 </script>
 
 
@@ -36,7 +39,7 @@ watch(leftWidth, (newVal, oldVal) => {
     <div class="common-layout">
         <el-container>
             <el-aside id="leftMenu">
-                <leftmenu ref="left" @chaddtabs="addtabs"></leftmenu>
+                <leftmenu ref="left" @chaddtabs="addtabs" :leftW="leftWidth"></leftmenu>
             </el-aside>
             <el-container>
                 <el-header>
@@ -53,49 +56,49 @@ watch(leftWidth, (newVal, oldVal) => {
     </div>
 </template>
 <style lang='scss' scoped>
-#leftMenu {
+    #leftMenu {
 
-    height: 100%;
-    background-color: rgb(28, 40, 146);
-}
-
-#rightMain {
-
-    height: 100%;
-
-}
-
-:deep(.el-main),
-:deep(.el-header) {
-    padding: 0;
-}
-
-:deep(.el-container) {
-    height: 100%;
-}
-
-:deep(.el-aside) {
-    width: auto;
-    height: 100%;
-}
-
-.common-layout {
-    width: 100%;
-    height: 100%;
-}
-
-.TopHeader {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    height: 60px;
-    font: normal 20px/30px "微软雅黑";
-    background-color: #339999;
-
-    padding: 0 20px;
-
-    span {
-        padding: 0 20px;
+        height: 100%;
+        background-color: rgb(226, 227, 236);
     }
-}
+
+    #rightMain {
+
+        height: 100%;
+
+    }
+
+    :deep(.el-main),
+    :deep(.el-header) {
+        padding: 0;
+    }
+
+    :deep(.el-container) {
+        height: 100%;
+    }
+
+    :deep(.el-aside) {
+        width: auto;
+        height: 100%;
+    }
+
+    .common-layout {
+        width: 100%;
+        height: 100%;
+    }
+
+    .TopHeader {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 60px;
+        font: normal 20px/30px "微软雅黑";
+        background-color: #339999;
+
+        padding: 0 20px;
+
+        span {
+            padding: 0 20px;
+        }
+    }
 </style>
