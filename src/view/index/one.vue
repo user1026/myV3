@@ -12,7 +12,7 @@ const router = useRouter();
 const routes = useRoute();
 const emit = defineEmits(["backRouterName"])
 onMounted(() => {
-    console.log(router, routes)
+    //console.log(tabname.getRouterName)
 })
 </script>
 <template>

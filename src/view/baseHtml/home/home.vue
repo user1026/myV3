@@ -17,16 +17,15 @@ const addtabs = (title, path) => {
     right.value.addtabs(title, path)
 }
 const getLeftWidth = (width) => {
-    // console.log(width)
-    // leftWidth.value = width + "px";
+
+}
+const leftMenuIndex = (path) => {
+    left.value.leftMenuPath(path)
+    console.log(1111111111111111)
 }
 onMounted(() => {
-    // leftWidth.value = document.getElementById("leftMenu").clientWidth + "px";
 
-})
-watch(leftWidth, (newVal, oldVal) => {
-    // document.getElementById("rightMain").style.width = (document.body.clientWidth - parseInt(oldVal)) + "px";
-    // console.log(document.getElementById("rightMain").style.width, document.body.clientWidth, newVal, oldVal)
+
 })
 </script>
 
@@ -46,7 +45,7 @@ watch(leftWidth, (newVal, oldVal) => {
                     </div>
                 </el-header>
                 <el-main class="Main" id="rightMain">
-                    <rightmain ref="right"></rightmain>
+                    <rightmain ref="right" @leftMenuIndex="leftMenuIndex"></rightmain>
                 </el-main>
             </el-container>
         </el-container>

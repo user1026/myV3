@@ -3,6 +3,9 @@ import {
     createWebHashHistory
 } from 'vue-router';
 import {
+    ref
+} from "vue"
+import {
     rightTabName
 } from "@/store/index.js"
 const index = () => import("@/view/baseHtml/home/home.vue");
@@ -28,19 +31,19 @@ const routes = [{
                     title: "首页"
                 }
             },
-            //{
-            //     path: "one",
-            //     component: () => import("@/view/index/one.vue"),
-            //     meta: {
-            //         title: "one"
-            //     }
-            // }, {
-            //     path: "two",
-            //     component: () => import("@/view/index/two.vue"),
-            //     meta: {
-            //         title: "two"
-            //     }
-            // }
+            {
+                path: "one",
+                component: () => import("@/view/index/one.vue"),
+                meta: {
+                    title: "one"
+                }
+            }, {
+                path: "two",
+                component: () => import("@/view/index/two.vue"),
+                meta: {
+                    title: "two"
+                }
+            }
         ],
     },
     {
@@ -62,8 +65,19 @@ const router = createRouter({
 
 router.beforeEach((to, from) => {
     const tabName = rightTabName();
-    tabName.setRouterName(to.meta.title)
-
-     console.log("pinia在前置路由中title值:" + tabName.getRouterName)
+    let routeList = to.matched.map(v => {
+        return {
+            name: v.meta.title,
+            path: v.path
+        }
+    })
+    let routerInfo = {
+        name: to.meta.title,
+        path: to.fullPath,
+        routeList
+    }
+    console.log(to)
+    tabName.setRouterInfo(routerInfo)
+    console.log("pinia在前置路由中title值:" + JSON.stringify(tabName.getRouterInfo))
 })
 export default router

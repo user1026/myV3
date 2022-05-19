@@ -2,36 +2,40 @@ import {
     defineStore
 } from "pinia"
 export const usestore = defineStore("userToken", {
-    state:()=>{
-return {
-    token :""
-}
+    state: () => {
+        return {
+            token: ""
+        }
     },
-    actions:{
-       setToken(val){
+    actions: {
+        setToken(val) {
             this.token = val;
         }
     },
-    getters:{
-        getToken(){
+    getters: {
+        getToken() {
             return this.token;
         }
     }
 })
-export const rightTabName=defineStore("rightTabName",{
-    state:()=>{
+export const rightTabName = defineStore("rightTabName", {
+    state: () => {
         return {
-            routerName:""
+            routerInfo: {
+                name: "",
+                path: ""
+            }
         }
     },
-    actions:{
-        setRouterName(val){
-            this.routerName=val;
+    actions: {
+        setRouterInfo(val) {
+            this.routerInfo = val;
         }
     },
-    getters:{
-        getRouterName(){
-            return this.routerName;
-        }
+    getters: {
+        getRouterInfo(state) {
+            return state.routerInfo;
+        },
+
     },
 })

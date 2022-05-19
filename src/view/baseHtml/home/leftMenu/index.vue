@@ -1,12 +1,15 @@
 <script setup>
-<<<<<<< HEAD
 import {
     ref,
     reactive,
     onMounted,
+    watch
 } from 'vue'
+import { rightTabName } from "@/store/index.js"
 const emit = defineEmits(["chaddtabs"])
+const nowTabName = rightTabName();
 const isCollapse = ref(false);
+const defaultPath = ref("/home")
 const menuList = reactive([{
     path: "/",
     title: "首页",
@@ -21,38 +24,6 @@ const menuList = reactive([{
     ]
 }])
 const handleOpen = () => {
-=======
-    import {
-        ref,
-        reactive,
-        onMounted,
-        toRaw
-    } from 'vue'
-    const emit = defineEmits(["chaddtabs"])
-    const isCollapse = ref(false);
-    const defaultPath = ref("/home");
-    let sum = ref(0);
-
-    const show = () => {
-        const sum = toRaw(sum)
-        console.log(sum);
-    }
-
-    const menuList = reactive([{
-        path: "/",
-        title: "首页",
-        children: [{
-                path: "/one",
-                title: "one"
-            },
-            {
-                path: "/two",
-                title: "two"
-            }
-        ]
-    }])
-    const handleOpen = () => {
->>>>>>> 1922ff57a5f1511252d8bc4335c261a65b2511a6
 
 }
 const handleClose = () => {
@@ -67,18 +38,18 @@ const addtabs = (title, path) => {
 const expandMenu = () => {
     isCollapse.value = !isCollapse.value;
 
-<<<<<<< HEAD
 }
-=======
-    }
-    const leftMenuPath = (path) => {
-        defaultPath.value = path;
-        console.log(path)
-    }
-    defineExpose({
-        leftMenuPath,
-    })
->>>>>>> 1922ff57a5f1511252d8bc4335c261a65b2511a6
+const leftMenuPath = (path) => {
+    defaultPath.value = path;
+    console.log(path)
+}
+watch(() => nowTabName.getRouterInfo, (now, old) => {
+    defaultPath.value = now.path;
+})
+defineExpose({
+    leftMenuPath,
+})
+
 </script>
 
 <template>
@@ -91,23 +62,14 @@ const expandMenu = () => {
     <div id="menu">
         <el-menu @open="handleOpen" unique-opene :default-active="defaultPath" class="el-menu-vertical-demo"
             :collapse="isCollapse" router>
-            <el-menu-item index="/home" @click="addtabs('首页','/home')">
+            <el-menu-item index="/home" @click="addtabs('首页', '/home')">
                 <template #title>
-<<<<<<< HEAD
-                    <div @click="addtabs('首页', '/home')">
+                    <div>
                         <el-icon>
                             <home-filled />
                         </el-icon>
                         <span>首页</span>
                     </div>
-=======
-
-                    <el-icon>
-                        <home-filled />
-                    </el-icon>
-                    <span>首页</span>
-
->>>>>>> 1922ff57a5f1511252d8bc4335c261a65b2511a6
                 </template>
             </el-menu-item>
             <el-sub-menu index v-for="item in menuList">
