@@ -35,7 +35,7 @@ onMounted(() => {
     <div class="common-layout">
         <el-container>
             <el-aside id="leftMenu">
-                <leftmenu ref="left" @chaddtabs="addtabs"></leftmenu>
+                <leftmenu ref="left" @chaddtabs="addtabs" :leftW="leftWidth"></leftmenu>
             </el-aside>
             <el-container>
                 <el-header>
@@ -55,7 +55,7 @@ onMounted(() => {
 #leftMenu {
 
     height: 100%;
-    background-color: rgb(28, 40, 146);
+    background-color: rgb(226, 227, 236);
 }
 
 #rightMain {
