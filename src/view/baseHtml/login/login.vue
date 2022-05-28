@@ -52,10 +52,13 @@
 import { computed, onMounted, reactive, ref, watch } from "vue";
 import userinfo from "./userinfo"
 import getCode from "./getcode";
-import { useRouter } from "vue-router"
+import { useRouter } from "vue-router";
+import { LeftMenuList } from "@/utils/routerUtils"
+import { getMenuList } from "@/store/index.js"
 const { submit, add, setuserinfo, getuserinfo } = userinfo();
 const { hascode, time, getcode } = getCode();
-const ruleForm = ref(null)
+const ruleForm = ref(null);
+const MenuList = getMenuList();
 const FormDatas = reactive({
   userphone: "",
   username: "",
@@ -94,6 +97,50 @@ const logintype = (code) => {
 };
 
 const login = () => {
+  let menulist = [{
+    path: "/",
+    component: () => import("@/view/baseHtml/index/index.vue"),
+    meta: {
+      title: "首页"
+    },
+    children: [{
+      path: "home",
+      component: () => import("@/view/home/index.vue"),
+      meta: {
+        title: "图表"
+      },
+    }]
+  }, {
+    path: "/",
+    component: () => import("@/view/baseHtml/index/index.vue"),
+    meta: {
+      title: "系统管理"
+    },
+    children: [
+      {
+        path: "one",
+        component: () => import("@/view/home/one.vue"),
+        meta: {
+          title: "one"
+        }
+      }, {
+        path: "two",
+        component: () => import("@/view/home/two.vue"),
+        meta: {
+          title: "two"
+        }
+      }
+    ]
+  },]
+
+  menulist.forEach(v => {
+    router.addRoute(v);
+  })
+
+
+  //menulist[0].children[0].children[0].path = "/home/three"
+  MenuList.setMenuList(LeftMenuList(menulist))
+  console.log(LeftMenuList(menulist))
   router.push({
     path: "/",
   })
@@ -112,12 +159,14 @@ const rest = () => {
   position: relative;
   background: url(../../../assets/images/login.jpeg) no-repeat;
   background-size: 100% 100%;
+
   h1 {
     font: bolder 28px/28px "微软雅黑";
     text-align: center;
     color: white;
     margin-top: 20px;
   }
+
   h2 {
     text-align: center;
     font: bolder 24px/24px "微软雅黑";
@@ -134,10 +183,12 @@ const rest = () => {
     background-color: rgba($color: white, $alpha: 0.1);
     padding: 50px;
     border-radius: 20px;
+
     :deep(.el-form-item__label),
     :deep(.el-checkbox__label) {
       color: white;
     }
+
     .login-type {
       display: flex;
       justify-content: space-around;
@@ -151,6 +202,7 @@ const rest = () => {
       justify-content: center;
     }
   }
+
   .loginform1400 {
     width: 35%;
     height: 70%;

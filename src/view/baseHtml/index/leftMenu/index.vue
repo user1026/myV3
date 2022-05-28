@@ -5,12 +5,13 @@ import {
     onMounted,
     watch
 } from 'vue'
-import { rightTabName } from "@/store/index.js"
+import { rightTabName, getMenuList } from "@/store/index.js"
 const emit = defineEmits(["chaddtabs"])
 const nowTabName = rightTabName();
+const MenuList = getMenuList();
 const isCollapse = ref(false);
 const defaultPath = ref("/home")
-const menuList = reactive([{
+const menuList = ref([{
     path: "/",
     title: "首页",
     children: [{
@@ -43,9 +44,15 @@ const leftMenuPath = (path) => {
     defaultPath.value = path;
     console.log(path)
 }
+onMounted(() => {
+    menuList.value = MenuList.getMenuList;
+})
 watch(() => nowTabName.getRouterInfo, (now, old) => {
     defaultPath.value = now.path;
 })
+// watch(() => MenuList.getMenuList, (n, o) => {
+//     menuList.value = n
+// })
 defineExpose({
     leftMenuPath,
 })
@@ -62,32 +69,40 @@ defineExpose({
     <div id="menu">
         <el-menu @open="handleOpen" unique-opene :default-active="defaultPath" class="el-menu-vertical-demo"
             :collapse="isCollapse" router>
-            <el-menu-item index="/home" @click="addtabs('首页', '/home')">
-                <template #title>
-                    <div>
-                        <el-icon>
-                            <home-filled />
-                        </el-icon>
-                        <span>首页</span>
-                    </div>
+            <template v-for="item in menuList">
+                <template v-if="item.children">
+                    <el-sub-menu :index="item.path">
+                        <template #title>{{ item.title }}</template>
+                        <el-menu-item-group>
+                            <el-menu-item :index="chItem.path" v-for="chItem in item.children"
+                                @click="addtabs(chItem.title, chItem.path)">
+                                <template #title>
+                                    <div>
+                                        <el-icon>
+                                            <home-filled />
+                                        </el-icon>
+                                        <span>{{ chItem.title }}</span>
+                                    </div>
+                                </template>
+                            </el-menu-item>
+                        </el-menu-item-group>
+                    </el-sub-menu>
                 </template>
-            </el-menu-item>
-            <el-sub-menu index v-for="item in menuList">
-                <template #title>{{ item.title }}</template>
-                <el-menu-item-group>
-                    <el-menu-item :index="chItem.path" v-for="chItem in item.children"
-                        @click="addtabs(chItem.title, chItem.path)">
+                <template v-else>
+                    <el-menu-item :index="item.path" @click="addtabs(item.title, item.path)">
                         <template #title>
                             <div>
                                 <el-icon>
                                     <home-filled />
                                 </el-icon>
-                                <span>{{ chItem.title }}</span>
+                                <span>{{ item.title }}</span>
                             </div>
                         </template>
                     </el-menu-item>
-                </el-menu-item-group>
-            </el-sub-menu>
+                </template>
+
+            </template>
+
         </el-menu>
     </div>
 </template>

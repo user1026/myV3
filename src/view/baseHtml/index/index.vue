@@ -14,6 +14,7 @@ const username = ref("123")
 const leftWidth = ref("300px");
 const router = useRouter();
 const addtabs = (title, path) => {
+    console.log(title, path, "path")
     right.value.addtabs(title, path)
 }
 const getLeftWidth = (width) => {
@@ -35,7 +36,7 @@ onMounted(() => {
     <div class="common-layout">
         <el-container>
             <el-aside id="leftMenu">
-                <leftmenu ref="left" @chaddtabs="addtabs" :leftW="leftWidth"></leftmenu>
+                <leftmenu ref="left" @chaddtabs="addtabs"></leftmenu>
             </el-aside>
             <el-container>
                 <el-header>

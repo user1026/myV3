@@ -33,9 +33,29 @@ export const rightTabName = defineStore("rightTabName", {
         }
     },
     getters: {
-        getRouterInfo(state) {
-            return state.routerInfo;
+        getRouterInfo() {
+            return this.routerInfo;
         },
 
     },
+})
+
+export const getMenuList = defineStore("getMenuList", {
+    state: () => {
+        return {
+            MenuList: []
+        }
+    },
+    actions: {
+        setMenuList(val) {
+
+            this.MenuList = val;
+        }
+    },
+    getters: {
+        getMenuList() {
+            return this.MenuList;
+        }
+    }
+
 })

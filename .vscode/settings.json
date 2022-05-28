@@ -5,6 +5,7 @@
     "cSpell.words": [
         "Datas",
         "getuserinfo",
+        "pinia",
         "setuserinfo",
         "userinfo",
         "usestore"
