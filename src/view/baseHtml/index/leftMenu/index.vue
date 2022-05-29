@@ -5,25 +5,14 @@ import {
     onMounted,
     watch
 } from 'vue'
-import { rightTabName, getMenuList } from "@/store/index.js"
+import { RouterInfo, leftActive, getMenuList } from "@/store/index.js"
 const emit = defineEmits(["chaddtabs"])
-const nowTabName = rightTabName();
+const nowTabName = RouterInfo();
+const leftActivePath = leftActive();
 const MenuList = getMenuList();
 const isCollapse = ref(false);
 const defaultPath = ref("/home")
-const menuList = ref([{
-    path: "/",
-    title: "首页",
-    children: [{
-        path: "/one",
-        title: "one"
-    },
-    {
-        path: "/two",
-        title: "two"
-    }
-    ]
-}])
+const menuList = ref([])
 const handleOpen = () => {
 
 }
@@ -40,21 +29,25 @@ const expandMenu = () => {
     isCollapse.value = !isCollapse.value;
 
 }
-const leftMenuPath = (path) => {
-    defaultPath.value = path;
-    console.log(path)
-}
+// const leftMenuPath = (path) => {
+//     defaultPath.value = path;
+//     console.log(path)
+// }
 onMounted(() => {
     menuList.value = MenuList.getMenuList;
 })
 watch(() => nowTabName.getRouterInfo, (now, old) => {
     defaultPath.value = now.path;
 })
+// watch(() => leftActivePath.getleftActivePath, (now, old) => {
+//     defaultPath.value = "\/" + now;
+//     console.log(now)
+// })
 // watch(() => MenuList.getMenuList, (n, o) => {
 //     menuList.value = n
 // })
 defineExpose({
-    leftMenuPath,
+    //leftMenuPath,
 })
 
 </script>

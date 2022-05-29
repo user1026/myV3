@@ -4,16 +4,17 @@ import {
     reactive,
     onMounted,
     onBeforeUpdate,
-
     watch
 } from 'vue'
 import {
     useRouter
 } from 'vue-router';
 import {
-    rightTabName
+    RouterInfo,
+    leftActive,
 } from "@/store/index.js"
-const tabName = rightTabName();
+const tabName = RouterInfo();
+const leftActivePath = leftActive();
 const router = useRouter();
 const tabsValue = ref("1");
 let tabIndex = ref(1);
@@ -21,13 +22,13 @@ const routerList = ref([]);
 const tabsList = ref([{
     path: "/home",
     name: "1",
-    title: "首页"
+    title: "图表"
 }]);
 const tabClick = (a, b) => {
     let toPath = tabsList.value.filter(v => {
         return v.name == a.props.name;
     })[0];
-    leftMenuIndex(toPath.path)
+    //  leftActivePath.setLeftActivePath(toPath.path)
     router.push(toPath.path)
 }
 const removeTab = (name) => {
@@ -38,24 +39,23 @@ const removeTab = (name) => {
         tabsList.value.push({
             path: "/home",
             name: "1",
-            title: "首页"
+            title: "图表"
         })
         tabIndex.value = "1";
-        leftMenuIndex("/home");
+        //leftActivePath.setLeftActivePath("/home")
+
         router.push('/home');
     } else {
         const tab = tabsList.value;
         tabsList.value = tab.filter(val => val.name != name);
-        tabsValue.value = tabsList.value[tabsList.value.length - 1].name;
-        tabIndex.value = Number(tabsList.value[tabsList.value.length - 1].name);
-        leftMenuIndex(tabsList.value[tabsList.value.length - 1].path);
-        router.push(tabsList.value[tabsList.value.length - 1].path)
-    }
-}
-const emit = defineEmits(["leftMenuPath"])
-const leftMenuIndex = (path) => {
+        if (tabsValue.value == name) {
+            tabsValue.value = tabsList.value[tabsList.value.length - 1].name;
+            tabIndex.value = Number(tabsList.value[tabsList.value.length - 1].name);
+            router.push(tabsList.value[tabsList.value.length - 1].path)
+        }
+        //leftActivePath.setLeftActivePath(tabsList.value[tabsList.value.length - 1].path)
 
-    emit("leftMenuPath", path);
+    }
 }
 onMounted(() => {
 

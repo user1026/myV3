@@ -18,7 +18,7 @@ export const usestore = defineStore("userToken", {
         }
     }
 })
-export const rightTabName = defineStore("rightTabName", {
+export const RouterInfo = defineStore("RouterInfo", {
     state: () => {
         return {
             routerInfo: {
@@ -39,7 +39,25 @@ export const rightTabName = defineStore("rightTabName", {
 
     },
 })
+export const leftActive = defineStore("leftActive", {
+    state: () => {
+        return {
+            leftActivePath: "",
+        }
+    },
+    actions: {
+        setLeftActivePath(val) {
 
+            this.leftActivePath = val;
+        }
+    },
+    getters: {
+        getLeftActivePath() {
+            return this.leftActivePath;
+        },
+
+    },
+})
 export const getMenuList = defineStore("getMenuList", {
     state: () => {
         return {

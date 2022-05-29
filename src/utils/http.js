@@ -21,7 +21,7 @@ http.interceptors.response.use(response => {
     if (response.code != 200) {
         ElMessage.error('发生错误')
     }
-    return response;
+    return response.data;
 }, error => {
 
     return Promise.reject(error);

@@ -41,7 +41,7 @@
         <el-form-item>
           <div class="button">
             <el-button type="success" @click="login">登 录</el-button>
-            <el-button @click="add">取 消</el-button>
+            <el-button @click="rest">取 消</el-button>
           </div>
         </el-form-item>
       </el-form>
@@ -55,7 +55,7 @@ import getCode from "./getcode";
 import { useRouter } from "vue-router";
 import { LeftMenuList } from "@/utils/routerUtils"
 import { getMenuList } from "@/store/index.js"
-const { submit, add, setuserinfo, getuserinfo } = userinfo();
+const { submit, setuserinfo, getuserinfo } = userinfo();
 const { hascode, time, getcode } = getCode();
 const ruleForm = ref(null);
 const MenuList = getMenuList();
@@ -83,7 +83,7 @@ const loginclass = computed(() => {
 })
 onMounted(() => {
   width.value = document.documentElement.offsetWidth
-  add();
+
 })
 const type1 = computed(() => {
   return typecode.value == 1 ? "typecss" : "";
@@ -138,7 +138,7 @@ const login = () => {
   })
 
 
-  //menulist[0].children[0].children[0].path = "/home/three"
+
   MenuList.setMenuList(LeftMenuList(menulist))
   console.log(LeftMenuList(menulist))
   router.push({
@@ -146,7 +146,6 @@ const login = () => {
   })
   // FormDatas.id = 1234
   // submit(FormDatas)
-
 }
 const rest = () => {
   ruleForm.value.resetFields();
@@ -164,7 +163,7 @@ const rest = () => {
     font: bolder 28px/28px "微软雅黑";
     text-align: center;
     color: white;
-    margin-top: 20px;
+    padding-top: 20px;
   }
 
   h2 {

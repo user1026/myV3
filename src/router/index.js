@@ -6,7 +6,7 @@ import {
     ref
 } from "vue"
 import {
-    rightTabName
+    RouterInfo
 } from "@/store/index.js"
 const index = () => import("@/view/baseHtml/index/index.vue");
 const page404 = () => import("@/view/baseHtml/404/404.vue");
@@ -71,7 +71,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from) => {
-    const tabName = rightTabName();
+    const tabName = RouterInfo();
     let routeList = to.matched.map(v => {
         return {
             name: v.meta.title,
@@ -83,8 +83,8 @@ router.beforeEach((to, from) => {
         path: to.fullPath,
         routeList
     }
-    console.log(to)
     tabName.setRouterInfo(routerInfo)
     console.log("pinia在前置路由中title值:" + JSON.stringify(tabName.getRouterInfo))
+
 })
 export default router

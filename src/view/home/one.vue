@@ -1,13 +1,13 @@
 <script setup>
 import { ref, reactive, onMounted } from "vue"
 import {
-    rightTabName
+    RouterInfo
 } from "@/store/index.js"
 import {
     useRoute,
     useRouter
 } from 'vue-router';
-const tabname = rightTabName();
+const tabname = RouterInfo();
 const router = useRouter();
 const routes = useRoute();
 const emit = defineEmits(["backRouterName"])

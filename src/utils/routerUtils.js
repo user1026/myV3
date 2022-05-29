@@ -6,6 +6,9 @@
 export const LeftMenuList = (menulist) => {
     let list = [];
     for (let i = 0; i < menulist.length; i++) {
+        if (menulist[i].path.indexOf("/") == -1) {
+            menulist[i].path = "/" + menulist[i].path
+        }
         list.push({
             title: menulist[i].meta.title,
             path: menulist[i].path

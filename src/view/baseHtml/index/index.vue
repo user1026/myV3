@@ -20,10 +20,6 @@ const addtabs = (title, path) => {
 const getLeftWidth = (width) => {
 
 }
-const leftMenuIndex = (path) => {
-    left.value.leftMenuPath(path)
-    console.log(1111111111111111)
-}
 onMounted(() => {
 
 
@@ -46,7 +42,7 @@ onMounted(() => {
                     </div>
                 </el-header>
                 <el-main class="Main" id="rightMain">
-                    <rightmain ref="right" @leftMenuIndex="leftMenuIndex"></rightmain>
+                    <rightmain ref="right"></rightmain>
                 </el-main>
             </el-container>
         </el-container>
