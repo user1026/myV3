@@ -43,9 +43,7 @@ watch(() => nowTabName.getRouterInfo, (now, old) => {
 //     defaultPath.value = "\/" + now;
 //     console.log(now)
 // })
-// watch(() => MenuList.getMenuList, (n, o) => {
-//     menuList.value = n
-// })
+
 defineExpose({
     //leftMenuPath,
 })

@@ -1,7 +1,7 @@
 import {
     defineStore
 } from "pinia"
-export const usestore = defineStore("userToken", {
+export const userToken = defineStore("userToken", {
     state: () => {
         return {
             token: ""
@@ -14,6 +14,23 @@ export const usestore = defineStore("userToken", {
     },
     getters: {
         getToken() {
+            return this.token;
+        }
+    }
+})
+export const userInfo = defineStore("userInfo", {
+    state: () => {
+        return {
+            userinfo: ""
+        }
+    },
+    actions: {
+        setUserInfo(val) {
+            this.token = val;
+        }
+    },
+    getters: {
+        getUserInfo() {
             return this.token;
         }
     }

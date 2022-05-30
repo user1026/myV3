@@ -55,7 +55,7 @@ import getCode from "./getcode";
 import { useRouter } from "vue-router";
 import { LeftMenuList } from "@/utils/routerUtils"
 import { getMenuList } from "@/store/index.js"
-const { submit, setuserinfo, getuserinfo } = userinfo();
+const { submit, setUser, removeUser, getuserinfo } = userinfo();
 const { hascode, time, getcode } = getCode();
 const ruleForm = ref(null);
 const MenuList = getMenuList();
@@ -72,9 +72,10 @@ watch(remember, (newval, oldval) => {
   if (newval === true) {
     if (FormDatas.username && FormDatas.password) {
       //window.localStorage.setItem()
+      setUser(FormDatas)
     }
   } else {
-
+    removeUser();
   }
 })
 let width = ref(1400)
@@ -83,7 +84,19 @@ const loginclass = computed(() => {
 })
 onMounted(() => {
   width.value = document.documentElement.offsetWidth
-
+  let bool = window.localStorage.getItem("isRemember");
+  console.log(bool == "true", "bool")
+  if (bool == "true") {
+    console.log(bool, "bool")
+    if (window.localStorage.getItem("user")) {
+      let user = window.atob(window.localStorage.getItem("user"));
+      FormDatas.username = user.split("-")[0];
+      FormDatas.password = user.split("-")[1];
+      remember.value = true;
+    } else {
+      window.localStorage.setItem("isRemember", false);
+    }
+  }
 })
 const type1 = computed(() => {
   return typecode.value == 1 ? "typecss" : "";

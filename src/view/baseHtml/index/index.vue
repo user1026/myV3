@@ -13,12 +13,14 @@ const right = ref(null);
 const username = ref("123")
 const leftWidth = ref("300px");
 const router = useRouter();
+//调用子组件添加tab标签页的方法
 const addtabs = (title, path) => {
-    console.log(title, path, "path")
     right.value.addtabs(title, path)
 }
-const getLeftWidth = (width) => {
-
+//退出
+const logout = () => {
+    window.localStorage.clear();
+    router.push("/login")
 }
 onMounted(() => {
 
@@ -38,7 +40,7 @@ onMounted(() => {
                 <el-header>
                     <div class="TopHeader">
                         <span>{{ username }}</span>
-                        <el-button type="info">退出</el-button>
+                        <el-button type="info" @click="logout">退出</el-button>
                     </div>
                 </el-header>
                 <el-main class="Main" id="rightMain">

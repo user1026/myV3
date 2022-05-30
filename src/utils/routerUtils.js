@@ -19,3 +19,15 @@ export const LeftMenuList = (menulist) => {
     }
     return list
 }
+
+export const addRoutes = (route) => {
+    let routeList = {
+        path: route.path,
+        component: () => import( /* @vite-ignore */ `@/${route.component}`),
+        meta: route.meta,
+    }
+    if (route.children && route.children.length > 0) {
+        routeList.children = addRoutes(route.children)
+    }
+    return routeList
+}

@@ -1,9 +1,7 @@
 <script setup>
 import {
     ref,
-    reactive,
     onMounted,
-    onBeforeUpdate,
     watch
 } from 'vue'
 import {
@@ -24,6 +22,7 @@ const tabsList = ref([{
     name: "1",
     title: "图表"
 }]);
+//点击某个标签
 const tabClick = (a, b) => {
     let toPath = tabsList.value.filter(v => {
         return v.name == a.props.name;
@@ -31,6 +30,7 @@ const tabClick = (a, b) => {
     //  leftActivePath.setLeftActivePath(toPath.path)
     router.push(toPath.path)
 }
+//关闭标签
 const removeTab = (name) => {
     if (tabsList.value.length == 1 && name == "1") {
         return;
@@ -60,6 +60,7 @@ const removeTab = (name) => {
 onMounted(() => {
 
 })
+//添加标签
 const addtabs = (title, path) => {
     let fList = tabsList.value.filter(val => val.title == title);
     if (fList.length > 0) {
@@ -86,7 +87,7 @@ watch(() => tabName.getRouterInfo, (now, old) => {
 <template>
     <div class="bread">
         <el-breadcrumb separator="/">
-            <el-breadcrumb-item v-for="(item, i) in routerList" :key="i" :to="item.path">{{ item.name }}
+            <el-breadcrumb-item v-for="(item, i) in routerList" :key="i">{{ item.name }}
             </el-breadcrumb-item>
         </el-breadcrumb>
     </div>
