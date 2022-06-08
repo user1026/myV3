@@ -85,7 +85,6 @@ const loginclass = computed(() => {
 onMounted(() => {
   width.value = document.documentElement.offsetWidth
   let bool = window.localStorage.getItem("isRemember");
-  console.log(bool == "true", "bool")
   if (bool == "true") {
     console.log(bool, "bool")
     if (window.localStorage.getItem("user")) {
@@ -112,12 +111,14 @@ const logintype = (code) => {
 const login = () => {
   let menulist = [{
     path: "/",
+    icon: "HomeFilled",
     component: () => import("@/view/baseHtml/index/index.vue"),
     meta: {
       title: "首页"
     },
     children: [{
       path: "home",
+      icon: "List",
       component: () => import("@/view/home/index.vue"),
       meta: {
         title: "图表"
@@ -129,15 +130,18 @@ const login = () => {
     meta: {
       title: "系统管理"
     },
+    icon: "HomeFilled",
     children: [
       {
-        path: "one",
-        component: () => import("@/view/home/one.vue"),
+        path: "role",
+        icon: "HomeFilled",
+        component: () => import("@/view/sysmng/rolemng/rolemng.vue"),
         meta: {
-          title: "one"
+          title: "role"
         }
       }, {
         path: "two",
+        icon: "HomeFilled",
         component: () => import("@/view/home/two.vue"),
         meta: {
           title: "two"
@@ -169,7 +173,7 @@ const rest = () => {
   width: 100%;
   height: 100%;
   position: relative;
-  background: url(../../../assets/images/login.jpeg) no-repeat;
+  background: url(../../../assets/images/ye.JPG) no-repeat;
   background-size: 100% 100%;
 
   h1 {

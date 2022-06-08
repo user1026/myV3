@@ -4,7 +4,7 @@ import {
 } from "@/utils/http.js"
 import {
     LeftMenuList,
-    routeList
+    addRoutes
 } from "@/utils/routerUtils.js"
 import {
     userToken,
@@ -57,7 +57,7 @@ const userinfo = () => {
             res.forEach(v => {
 
 
-                router.addRoute(routeList(v));
+                router.addRoute(addRoutes(v));
             })
             menuList.setMenuList(LeftMenuList(res))
             return res;

@@ -11,6 +11,7 @@ export const LeftMenuList = (menulist) => {
         }
         list.push({
             title: menulist[i].meta.title,
+            icon: menulist[i].icon,
             path: menulist[i].path
         })
         if (menulist[i].children) {

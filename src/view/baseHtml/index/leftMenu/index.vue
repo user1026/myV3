@@ -63,14 +63,19 @@ defineExpose({
             <template v-for="item in menuList">
                 <template v-if="item.children">
                     <el-sub-menu :index="item.path">
-                        <template #title>{{ item.title }}</template>
+                        <template #title>
+                            <el-icon>
+                                <component :is="item.icon"></component>
+                            </el-icon>
+                            {{ item.title }}
+                        </template>
                         <el-menu-item-group>
                             <el-menu-item :index="chItem.path" v-for="chItem in item.children"
                                 @click="addtabs(chItem.title, chItem.path)">
                                 <template #title>
                                     <div>
                                         <el-icon>
-                                            <home-filled />
+                                            <component :is="chItem.icon"></component>
                                         </el-icon>
                                         <span>{{ chItem.title }}</span>
                                     </div>
@@ -84,7 +89,7 @@ defineExpose({
                         <template #title>
                             <div>
                                 <el-icon>
-                                    <home-filled />
+                                    <component :is="chItem.icon"></component>
                                 </el-icon>
                                 <span>{{ item.title }}</span>
                             </div>
