@@ -1,5 +1,5 @@
 <template>
-    <usetable :tableData="tableData" :tableColum="tableColum">
+    <usetable :tableData="tableData" :isMultipleSelect="true" :tableColum="tableColum" @getSelectData="getSelectData">
         <template #btn="{ data }">
             <el-button @click="edit(data.$index, data.row)">edit</el-button>
             <el-button @click="del(data.$index, data.row)">del</el-button>
@@ -12,6 +12,9 @@ import usetable from "@/components/usetable.vue"
 defineComponent({
     usetable
 })
+const aa = () => {
+    console.log("子组件调用")
+}
 const tableData = ref([
     {
         date: '2016-05-03',
@@ -54,6 +57,9 @@ const tableColum = ref([
         width: 160
     }
 ])
+const getSelectData = (data) => {
+    console.log(data, "data")
+}
 const edit = (index, row) => {
     console.log(index, row)
 }

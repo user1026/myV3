@@ -1,8 +1,9 @@
 <template>
-    <el-button type="danger">删除</el-button>
-    <el-table :data="prop.tableData" :border="prop.border" highlight-current-row :height="prop.height"
-        style="width: 100%">
-        <el-table-column v-if="prop.isMultipleSelect" type="selection" width="55"></el-table-column>
+    <el-table ref="myTable" @select="selectedData" @select-all="selectAll" :data="prop.tableData" :border="prop.border"
+        highlight-current-row :height="prop.height" style="width: 100%">
+        <template v-if="prop.showCheckbox == true">
+            <el-table-column type="selection" width="55"></el-table-column>
+        </template>
         <template v-for="(item, i) in prop.tableColum" :key="i">
             <el-table-column v-if="item.showSlot == true" :fixed="item.fixed" :prop="item.prop" :label="item.label"
                 :width="item.width ? item.width : 120">
@@ -19,7 +20,12 @@
 </template>
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
+const myTable = ref(null)
 const prop = defineProps({
+    showCheckbox: {
+        type: Boolean,
+        default: true
+    },
     tableData: {
         type: Array,
         default: () => { return [] }
@@ -49,9 +55,22 @@ const prop = defineProps({
         default: true
     },
 })
-const tableData = ref(prop.tableData)
-const tableColum = ref(prop.tableColum)
-console.log(prop.tableData, prop.tableColum)
+const selectedData = (selection, row) => {
+    if (prop.isMultipleSelect == true) {
+
+        emit("getSelectData", selection)
+    } else {
+        selection.length == 1 ? null : myTable.value.toggleRowSelection(selection.shift(), false)
+        emit("getSelectData", row)
+    }
+}
+const selectAll = (selection) => {
+    emit("getSelectData", selection)
+}
+const emit = defineEmits(["getSelectData"]);
+onMounted(() => {
+
+})
 </script>
 <style lang='scss' scoped>
 </style>
