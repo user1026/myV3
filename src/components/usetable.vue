@@ -17,44 +17,59 @@
                 :width="item.width ? item.width : 80"></el-table-column>
         </template>
     </el-table>
+    <el-pagination background @current-change="pageNumChange" @next-click="nextClick" @prev-click="prevClick"  :current-page="Page.pageNum" :page-size="Page.size"  :layout="prev, pager, next" :total="total" />
 </template>
 <script setup>
 import { ref, reactive, onMounted } from 'vue'
 const myTable = ref(null)
 const prop = defineProps({
+    //显示选择框
     showCheckbox: {
         type: Boolean,
         default: true
     },
+    //列表数据
     tableData: {
         type: Array,
         default: () => { return [] }
     },
+    //列名
     tableColum: {
         type: Array,
         default: () => { return [] }
     },
+    //是否多选
     isMultipleSelect: {
         type: Boolean,
         default: false
     },
+    //总数
     total: {
         type: Number,
         default: 0
     },
+    //页数相关
     Page: {
         type: Object,
         default: () => { return { size: 10, pageNum: 0 } }
     },
+    //高度
     height: {
         type: Number,
         default: 500,
     },
+    //边框
     border: {
         type: Boolean,
         default: true
     },
 })
+const prevClick=(num)=>{}
+const nextClick=(num)=>{}
+const pageNumChange=(num)=>{
+     emit("PageNumChange",num)
+}
+//选择数据
 const selectedData = (selection, row) => {
     if (prop.isMultipleSelect == true) {
 
@@ -64,10 +79,11 @@ const selectedData = (selection, row) => {
         emit("getSelectData", row)
     }
 }
+//选择全部
 const selectAll = (selection) => {
     emit("getSelectData", selection)
 }
-const emit = defineEmits(["getSelectData"]);
+const emit = defineEmits(["getSelectData","PageNumChange"]);
 onMounted(() => {
 
 })

@@ -8,6 +8,8 @@ import {
 import {
     RouterInfo
 } from "@/store/index.js"
+import sys from "./sys.js";
+import test from './test.js';
 const index = () => import("@/view/baseHtml/index/index.vue");
 const page404 = () => import("@/view/baseHtml/404/404.vue");
 const login = () => import("@/view/baseHtml/login/login.vue");
@@ -37,19 +39,8 @@ const routes = [{
     //                 title: "首页"
     //             }
     //         },
-    //         {
-    //             path: "one",
-    //             component: () => import("@/view/index/one.vue"),
-    //             meta: {
-    //                 title: "one"
-    //             }
-    //         }, {
-    //             path: "two",
-    //             component: () => import("@/view/index/two.vue"),
-    //             meta: {
-    //                 title: "two"
-    //             }
-    //         }
+    //        ...sys,
+    //        ...test
     //     ],
     // },
     {

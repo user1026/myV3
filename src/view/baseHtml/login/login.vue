@@ -51,6 +51,7 @@
 <script setup>
 import { computed, onMounted, reactive, ref, watch } from "vue";
 import userinfo from "./userinfo"
+import sys from "@/router/sys.js"
 import getCode from "./getcode";
 import { useRouter } from "vue-router";
 import { LeftMenuList } from "@/utils/routerUtils"
@@ -132,21 +133,7 @@ const login = () => {
     },
     icon: "HomeFilled",
     children: [
-      {
-        path: "role",
-        icon: "HomeFilled",
-        component: () => import("@/view/sysmng/rolemng/rolemng.vue"),
-        meta: {
-          title: "role"
-        }
-      }, {
-        path: "two",
-        icon: "HomeFilled",
-        component: () => import("@/view/home/two.vue"),
-        meta: {
-          title: "two"
-        }
-      }
+     ...sys,
     ]
   },]
 

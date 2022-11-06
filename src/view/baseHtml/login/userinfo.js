@@ -4,7 +4,7 @@ import {
 } from "@/utils/http.js"
 import {
     LeftMenuList,
-    addRoutes
+    TransformRoutes
 } from "@/utils/routerUtils.js"
 import {
     userToken,
@@ -52,14 +52,11 @@ const userinfo = () => {
         let menulist = await post("/getMenuList", {
             token
         }).then((res) => {
-            const menuList = getMenuList();
-            menuList.setMenuList(res);
-            res.forEach(v => {
-
-
-                router.addRoute(addRoutes(v));
+            const MenuList = getMenuList();
+            res.forEach(v=>{
+                router.addRoute(TransformRoutes(v));
             })
-            menuList.setMenuList(LeftMenuList(res))
+            MenuList.setMenuList(LeftMenuList(res))
             return res;
         })
         return menulist

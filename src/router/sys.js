@@ -1,0 +1,23 @@
+export default [
+  {
+    path:"menu",
+    component:()=>import("@/view/sysmng/menumng/menu.vue"),
+    meta:{
+      title:"菜单管理"
+    }
+  },
+  {
+    path:"role",
+    component:()=>import("@/view/sysmng/rolemng/role.vue"),
+    meta:{
+      title:"角色管理"
+    }
+  },
+  {
+    path:"user",
+    component:()=>import("@/view/sysmng/usermng/user.vue"),
+    meta:{
+      title:"用户管理"
+    }
+  },
+]

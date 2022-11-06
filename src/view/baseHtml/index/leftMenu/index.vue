@@ -25,6 +25,7 @@ const addtabs = (title, path) => {
         path
     );
 }
+//收起/展示菜单
 const expandMenu = () => {
     isCollapse.value = !isCollapse.value;
 
@@ -36,6 +37,7 @@ const expandMenu = () => {
 onMounted(() => {
     menuList.value = MenuList.getMenuList;
 })
+//监听右侧点击的路由激活对应的菜单
 watch(() => nowTabName.getRouterInfo, (now, old) => {
     defaultPath.value = now.path;
 })
@@ -51,15 +53,18 @@ defineExpose({
 </script>
 
 <template>
-    <div class="menuIcon" @click="expandMenu">
-        <el-icon>
-            <expand />
-        </el-icon>
-        <p class="ptitle" v-if="!isCollapse">xxx管理</p>
-    </div>
+   
     <div id="menu">
         <el-menu @open="handleOpen" unique-opene :default-active="defaultPath" class="el-menu-vertical-demo"
             :collapse="isCollapse" router>
+            <div class="menuIcon" >
+                <span @click="expandMenu">
+                    <el-icon>
+                        <expand />
+                    </el-icon>
+                </span>
+                <span class="ptitle" v-show="!isCollapse">管理系统</span>
+            </div>
             <template v-for="item in menuList">
                 <template v-if="item.children">
                     <el-sub-menu :index="item.path">
@@ -98,7 +103,6 @@ defineExpose({
                 </template>
 
             </template>
-
         </el-menu>
     </div>
 </template>
@@ -106,16 +110,15 @@ defineExpose({
 <style lang='scss' scoped>
 .menuIcon {
     padding: 10px 20px;
-    display: flex;
+    /* display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: center; */
     height: 60px;
-    font: normal 18px/60px "微软雅黑";
+    font: normal 16px/60px "微软雅黑";
 
-
-    .ptitle {
-        width: 145px;
-        padding: 0 30px 0 20px;
-    }
+span{
+    padding: 5px;
+}
+   
 }
 </style>
