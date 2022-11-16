@@ -4,10 +4,15 @@
     ],
     "cSpell.words": [
         "Datas",
+        "getcode",
         "getuserinfo",
+        "hascode",
+        "newval",
+        "oldval",
         "pinia",
         "setuserinfo",
         "userinfo",
+        "userphone",
         "userToken"
     ]
 }

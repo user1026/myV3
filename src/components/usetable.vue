@@ -1,4 +1,7 @@
 <template>
+    <div>
+
+   
     <el-table ref="myTable" @select="selectedData" @select-all="selectAll" :data="prop.tableData" :border="prop.border"
         highlight-current-row :height="prop.height" style="width: 100%">
         <template v-if="prop.showCheckbox == true">
@@ -17,7 +20,8 @@
                 :width="item.width ? item.width : 80"></el-table-column>
         </template>
     </el-table>
-    <el-pagination background @current-change="pageNumChange" @next-click="nextClick" @prev-click="prevClick"  :current-page="Page.pageNum" :page-size="Page.size"  :layout="prev, pager, next" :total="total" />
+    <el-pagination background @current-change="pageNumChange" @next-click="nextClick" @prev-click="prevClick"  :current-page="Page.pageNum" :page-size="Page.size"  layout="prev, pager, next" :total="total" />
+</div>
 </template>
 <script setup>
 import { ref, reactive, onMounted } from 'vue'

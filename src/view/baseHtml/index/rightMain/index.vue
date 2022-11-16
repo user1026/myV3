@@ -14,83 +14,60 @@ import {
 const tabName = RouterInfo();
 const leftActivePath = leftActive();
 const router = useRouter();
-const tabsValue = ref("1");
-let tabIndex = ref(1);
+const tabsValue = ref("");
 const routerList = ref([]);
-const tabsList = ref([{
-    path: "/home",
-    name: "1",
-    title: "图表"
-}]);
+const tabsList = ref([]);
 //点击某个标签
 const tabClick = (a, b) => {
     let toPath = tabsList.value.filter(v => {
         return v.name == a.props.name;
     })[0];
-    //  leftActivePath.setLeftActivePath(toPath.path)
     router.push(toPath.path)
 }
 //关闭标签
 const removeTab = (name) => {
-    if (tabsList.value.length == 1 && name == "1") {
-        return;
-    } else if (tabsList.value.length == 1) {
-        tabsList.length = 0;
-        tabsList.value.push({
-            path: "/home",
-            name: "1",
-            title: "图表"
-        })
-        tabIndex.value = "1";
-        //leftActivePath.setLeftActivePath("/home")
-
-        router.push('/home');
-    } else {
+    if (tabsList.value.length == 1) { //关闭最后一个时，清空tab页签数组
+        tabsList.value=[];
+        routerList.value=[];
+    } else {//关闭其中一个标签页时显示最后一个标签页的内容
         const tab = tabsList.value;
         tabsList.value = tab.filter(val => val.name != name);
         if (tabsValue.value == name) {
             tabsValue.value = tabsList.value[tabsList.value.length - 1].name;
-            tabIndex.value = Number(tabsList.value[tabsList.value.length - 1].name);
+            
             router.push(tabsList.value[tabsList.value.length - 1].path)
         }
-        //leftActivePath.setLeftActivePath(tabsList.value[tabsList.value.length - 1].path)
-
     }
 }
 onMounted(() => {
 
 })
 //添加标签
-const addtabs = (title, path) => {
+const addTabs = (title, path) => {
     let fList = tabsList.value.filter(val => val.title == title);
     if (fList.length > 0) {
         tabsValue.value = fList[0].name;
         return;
     } else {
-        tabIndex.value += 1;
+     
         tabsList.value.push({
             path,
-            name: tabIndex.value + "",
+            name: title,
             title: title,
         })
-        tabsValue.value = tabIndex.value + ""
+        tabsValue.value =title;
     }
 }
 
 defineExpose({
-    addtabs,
+    addTabs,
 })
 watch(() => tabName.getRouterInfo, (now, old) => {
     routerList.value = now.routeList
 })
 </script>
 <template>
-    <div class="bread">
-        <el-breadcrumb separator="/">
-            <el-breadcrumb-item v-for="(item, i) in routerList" :key="i">{{ item.name }}
-            </el-breadcrumb-item>
-        </el-breadcrumb>
-    </div>
+   
     <div>
         <el-tabs v-model="tabsValue" type="card" class="demo-tabs" closable @tab-remove="removeTab"
             @tab-click="tabClick">
@@ -102,7 +79,5 @@ watch(() => tabName.getRouterInfo, (now, old) => {
     </div>
 </template>
 <style lang='scss' scoped>
-.bread {
-    padding: 10px 20px;
-}
+
 </style>

@@ -11,7 +11,7 @@ export const LeftMenuList = (menulist) => {
         }
         list.push({
             title: menulist[i].meta.title,
-            icon: menulist[i].icon,
+            icon: menulist[i].icon?menulist[i].icon:"",
             path: menulist[i].path
         })
         if (menulist[i].children&&menulist[i].children.length>0) {
@@ -20,14 +20,17 @@ export const LeftMenuList = (menulist) => {
     }
     return list
 }
-
+/**
+ * 
+ * @param {*} route 
+ * @returns 
+ */
 export const TransformRoutes = (route) => {
-    let routeList =[];
     for(let i=0;i<route.length;i++){
         route[i].component=() => import( /* @vite-ignore */ `@/${route.component}`);
         if (route[i].children && route[i].children.length > 0) {
             route[i].children = TransformRoutes(route[i].children)
         }
     }
-    return routeList
+    return route
 }

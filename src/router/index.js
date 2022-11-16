@@ -12,7 +12,7 @@ import sys from "./sys.js";
 import test from './test.js';
 const index = () => import("@/view/baseHtml/index/index.vue");
 const page404 = () => import("@/view/baseHtml/404/404.vue");
-const login = () => import("@/view/baseHtml/login/login.vue");
+const login = () => import("@/view/baseHtml/login/login.vue"); 
 
 
 const routes = [{

@@ -1,17 +1,15 @@
 <template>
-    <usetable :tableData="tableData" :isMultipleSelect="true" :tableColum="tableColum" @getSelectData="getSelectData">
+    角色
+    <UseTable :tableData="tableData" :isMultipleSelect="true" :tableColum="tableColum" @getSelectData="getSelectData">
         <template #btn="{ data }">
             <el-button @click="edit(data.$index, data.row)">edit</el-button>
             <el-button @click="del(data.$index, data.row)">del</el-button>
         </template>
-    </usetable>
+    </UseTable>
 </template>
 <script setup>
-import { ref, reactive, onMounted, defineComponent } from 'vue'
-import usetable from "@/components/usetable.vue"
-defineComponent({
-    usetable
-})
+import { ref, reactive, onMounted } from 'vue'
+import UseTable from "@/components/UseTable.vue"
 const aa = () => {
     console.log("子组件调用")
 }

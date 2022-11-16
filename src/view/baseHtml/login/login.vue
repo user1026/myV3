@@ -1,19 +1,19 @@
 <template>
   <div class="login">
     <h1>通用模板</h1>
-    <div :class="`${loginclass}`">
+    <div :class="`${loginClass}`">
       <el-form :model="FormDatas" ref="ruleForm">
         <el-form-item>
           <h2>登 录</h2>
         </el-form-item>
         <el-form-item>
           <div class="login-type">
-            <p :class="`${type1}`" @click="logintype(1)">账号登陆</p>
+            <p :class="`${type1}`" @click="loginType(1)">账号登陆</p>
             <p>/</p>
-            <p :class="`${type2}`" @click="logintype(2)">手机号登陆</p>
+            <p :class="`${type2}`" @click="loginType(2)">手机号登陆</p>
           </div>
         </el-form-item>
-        <template v-if="typecode === 1">
+        <template v-if="typeCode === 1">
           <el-form-item label="账号" prop="username">
             <el-input v-model="FormDatas.username"></el-input>
           </el-form-item>
@@ -29,12 +29,12 @@
             <el-input v-model="FormDatas.userphone"></el-input>
           </el-form-item>
           <el-form-item label="验证码" prop="code">
-            <el-input v-model="FormDatas.code" style="width: 60%"></el-input>
+            <el-input v-model="FormDatas.code" style="width: 55%"></el-input>
             <template v-if="!hascode">
-              <el-button @click="getcode" type="primary" style="width: 39%">获取验证码</el-button>
+              <el-button @click="getcode" type="primary" style="width: 45%">获取验证码</el-button>
             </template>
             <template v-else>
-              <el-button :disabled="hascode" type="primary">还剩[[time]] 秒</el-button>
+              <el-button :disabled="hascode" type="primary">还剩{{time}} 秒</el-button>
             </template>
           </el-form-item>
         </template>
@@ -67,7 +67,7 @@ const FormDatas = reactive({
   password: "",
 });
 const router = useRouter();
-const typecode = ref(1);
+const typeCode = ref(1);
 const remember = ref(false);
 watch(remember, (newval, oldval) => {
   if (newval === true) {
@@ -80,8 +80,8 @@ watch(remember, (newval, oldval) => {
   }
 })
 let width = ref(1400)
-const loginclass = computed(() => {
-  return width.value < 1400 ? "loginform loginform1400" : "loginform"
+const loginClass = computed(() => {
+  return width.value < 1400 ? "loginForm loginForm1400" : "loginForm"
 })
 onMounted(() => {
   width.value = document.documentElement.offsetWidth
@@ -99,14 +99,14 @@ onMounted(() => {
   }
 })
 const type1 = computed(() => {
-  return typecode.value == 1 ? "typecss" : "";
+  return typeCode.value == 1 ? "typeCss" : "";
 });
 const type2 = computed(() => {
-  const { value } = typecode;
-  return value == 1 ? "" : "typecss";
+  const { value } = typeCode;
+  return value == 1 ? "" : "typeCss";
 });
-const logintype = (code) => {
-  typecode.value = code;
+const loginType = (code) => {
+  typeCode.value = code;
 };
 
 const login = () => {
@@ -176,9 +176,9 @@ const rest = () => {
     color: white;
   }
 
-  .loginform {
-    width: 25%;
-    height: 45%;
+  .loginForm {
+    width: 25vw;
+    height: 55vh;
     position: absolute;
     left: 80%;
     top: 50%;
@@ -206,14 +206,14 @@ const rest = () => {
     }
   }
 
-  .loginform1400 {
+  .loginForm1400 {
     width: 35%;
     height: 70%;
     padding: 20px 50px;
   }
 }
 
-.typecss {
+.typeCss {
   border-bottom: 2px solid greenyellow;
   color: greenyellow;
 }
