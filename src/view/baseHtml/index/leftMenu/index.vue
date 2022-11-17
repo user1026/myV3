@@ -67,7 +67,7 @@
         <div class="menuIcon">
             <span class="ptitle" v-show="!props.isCollapse">admin管理系统</span>
         </div>
-        <el-menu @open="handleOpen" unique-opened :default-active="defaultPath" class="el-menu-vertical-demo"
+        <el-menu id="elemenu" @open="handleOpen" unique-opened :default-active="defaultPath" class="el-menu-vertical-demo"
             :collapse="isCollapse" router>
             <template v-for="item in menuList">
                 <template v-if="item.children">
@@ -121,12 +121,15 @@
             align-items: center;
             height: 60px;
             font: normal 16px/60px "微软雅黑";
-            background-color: white;
+            /* background-color: white; */
 
             span {
                 padding: 5px;
             }
 
+        }
+        #elemenu{
+          
         }
     }
 </style>

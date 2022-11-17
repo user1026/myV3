@@ -14,7 +14,7 @@
     const left = ref(null);
     const right = ref(null);
     const username = ref("123")
-    const leftWidth = ref("300px");
+    //const leftWidth = ref("300px");
     const router = useRouter();
     //调用子组件添加tab标签页的方法
     const addTabs = (title, path) => {
@@ -41,7 +41,7 @@
             </el-aside>
             <el-container>
                 <el-header>
-                    <div class="TopHeader">
+                    <div id="TopHeader">
                         <div class="TopLeft">
                             <el-breadcrumb separator="/">
                                 <el-breadcrumb-item v-for="(item, i) in routerList" :key="i">{{ item.name }}
@@ -63,22 +63,15 @@
 </template>
 <style lang='scss' scoped>
     #leftMenu {
-
         height: 100%;
-        background-color: rgb(226, 227, 236);
-    }
-
+        border-right: 1px solid rgb(37, 11, 150);
+    }           
     #rightMain {
-
         height: 100%;
-
     }
-
-    :deep(.el-main),
     :deep(.el-header) {
-        padding: 0;
-    }
-
+        padding: 0; 
+    }  
     :deep(.el-header) {
         height: 40px;
     }
@@ -97,11 +90,11 @@
         height: 100%;
     }
 
-    .TopHeader {
-        height: 40px;
-        font: normal 20px/30px "微软雅黑";
+    #TopHeader {
+        height: 50px;
+        font: normal 20px/20px "微软雅黑";
         background-color: white;
-        padding: 0 20px;
+        padding: 0 0px; 
         overflow: hidden;
         position: relative;
         border-bottom: 1px solid black;
@@ -112,11 +105,8 @@
         }
         .TopRight{
             position: absolute;
-            top:10px;
+            top:5px;
             right:20px;
-        }
-        span {
-            padding: 0 20px;
         }
     }
 </style>
