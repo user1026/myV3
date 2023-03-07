@@ -25,9 +25,10 @@ export const LeftMenuList = (menulist) => {
  * @param {*} route 
  * @returns 
  */
+const modules=import.meta.glob("/src/view/*/*/*vue");
 export const TransformRoutes = (route) => {
     for(let i=0;i<route.length;i++){
-        route[i].component=() => import( /* @vite-ignore */ `@/${route.component}`);
+        route[i].component=modules[v.component]
         if (route[i].children && route[i].children.length > 0) {
             route[i].children = TransformRoutes(route[i].children)
         }

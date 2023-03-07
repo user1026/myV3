@@ -49,7 +49,7 @@
   </div>
 </template>
 <script setup>
-import { computed, onMounted, reactive, ref, watch } from "vue";
+import { computed, onMounted, reactive, ref, watch,defineAsyncComponent } from "vue";
 import userinfo from "./userinfo"
 import sys from "@/router/sys.js"
 import getCode from "./getcode";
@@ -60,6 +60,7 @@ const { submit, setUser, removeUser, getuserinfo } = userinfo();
 const { hascode, time, getcode } = getCode();
 const ruleForm = ref(null);
 const MenuList = getMenuList();
+const views=import.meta.glob("/src/view/*/*/*.vue");
 const FormDatas = reactive({
   userphone: "",
   username: "",
@@ -110,24 +111,50 @@ const loginType = (code) => {
 };
 
 const login = () => {
+  // let menulist = [{
+  //   path: "/",
+  //   icon: "HomeFilled",
+  //   component: () => import("@/view/baseHtml/index/index.vue"),
+  //   meta: {
+  //     title: "首页"
+  //   },
+  //   children: [{
+  //     path: "home",
+  //     icon: "List",
+  //     component: () => import("@/view/home/index.vue"),
+  //     meta: {
+  //       title: "图表"
+  //     },
+  //   }]
+  // }, {
+  //   path: "/",
+  //   component: () => import("@/view/baseHtml/index/index.vue"),
+  //   meta: {
+  //     title: "系统管理"
+  //   },
+  //   icon: "HomeFilled",
+  //   children: [
+  //    ...sys,
+  //   ]
+  // },]
   let menulist = [{
     path: "/",
     icon: "HomeFilled",
-    component: () => import("@/view/baseHtml/index/index.vue"),
+    component: "/src/view/baseHtml/index/index.vue",
     meta: {
       title: "首页"
     },
     children: [{
       path: "home",
       icon: "List",
-      component: () => import("@/view/home/index.vue"),
+      component:"/src/view/baseHtml/home/index.vue",
       meta: {
         title: "图表"
       },
     }]
   }, {
     path: "/",
-    component: () => import("@/view/baseHtml/index/index.vue"),
+    component: "/src/view/baseHtml/index/index.vue",
     meta: {
       title: "系统管理"
     },
@@ -136,15 +163,20 @@ const login = () => {
      ...sys,
     ]
   },]
-
   menulist.forEach(v => {
+    v.component=views[v.component];
+    if(v.children.length>0){
+      v.children.forEach(vv=>{
+        vv.component=views[vv.component];
+      })
+    }
     router.addRoute(v);
   })
 
 
 
   MenuList.setMenuList(LeftMenuList(menulist))
-  console.log(LeftMenuList(menulist))
+ let x=MenuList.getMenuList
   router.push({
     path: "/",
   })
