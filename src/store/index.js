@@ -21,17 +21,8 @@ export const userToken = defineStore("userToken", {
 export const userInfo = defineStore("userInfo", {
     state: () => {
         return {
-            userinfo: ""
-        }
-    },
-    actions: {
-        setUserInfo(val) {
-            this.token = val;
-        }
-    },
-    getters: {
-        getUserInfo() {
-            return this.token;
+            userName:"",
+            token:"",
         }
     }
 })
