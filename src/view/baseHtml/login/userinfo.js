@@ -7,27 +7,24 @@ import {
     TransformRoutes
 } from "@/utils/routerUtils.js"
 import {
-    userToken,
     userInfo,
     getMenuList
 } from "@/store/index.js"
 const userinfo = () => {
     //提交
     const submit = async (FormDatas) => {
-        const usertoken = userToken();
+        const userInfo = userInfo();
         let token = await post("/login", FormDatas).then(async res => {
             window.sessionStorage.setItem("token", res);
-            usertoken.setToken(res)
+            userInfo.$patch((state)=>{state.token=res});
             await getuserinfo(res)
             await getUserMenuList(res)
             return res
-
         })
         return token
     };
     //记住密码功能
     const setUser = (FormDatas) => {
-        var user = window.btoa(`${FormDatas.username}-${FormDatas.password}`);
         window.localStorage.setItem("user", user);
         window.localStorage.setItem("isRemember", true);
     };

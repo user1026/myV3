@@ -11,7 +11,6 @@
     } from "vue-router"
     import {
   RouterInfo,
-  leftActive,
   getMenuList
 } from "@/store/index.js"
     import LeftMenu from "./leftMenu.js";
@@ -19,8 +18,6 @@
     const {nowTabName,isCollapse,handleOpen ,leftSpan,rightSpan,menuList,defaultPath,changeCollapse,addRightTabs} =LeftMenu();
     const {addTabs,removeTab,tabClick,tabsList,tabsValue,routerList} =RightMain();
     const MenuList = getMenuList();
-    const left = ref(null);
-    const right = ref(null);
     const username = ref("123")
     //const leftWidth = ref("300px");
     const router = useRouter();

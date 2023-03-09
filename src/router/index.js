@@ -3,18 +3,10 @@ import {
     createWebHashHistory
 } from 'vue-router';
 import {
-    ref
-} from "vue"
-import {
     RouterInfo
 } from "@/store/index.js"
-import sys from "./sys.js";
-import test from './test.js';
-const index = () => import("@/view/baseHtml/index/index.vue");
 const page404 = () => import("@/view/baseHtml/404/404.vue");
 const login = () => import("@/view/baseHtml/login/login.vue"); 
-
-
 const routes = [{
         path: "/login",
         component: login,
@@ -22,27 +14,6 @@ const routes = [{
             title: "登陆页"
         }
     },
-    // {
-    //     path: "/index",
-    //     component: index,
-    //     meta:{
-    //     }
-    // },
-    // {
-    //     path: "/",
-    //     component: index,
-
-    //     children: [{
-    //             path: "home",
-    //             component: () => import("@/view/index/index.vue"),
-    //             meta: {
-    //                 title: "首页"
-    //             }
-    //         },
-    //        ...sys,
-    //        ...test
-    //     ],
-    // },
     {
         path: "/404",
         component: page404,
