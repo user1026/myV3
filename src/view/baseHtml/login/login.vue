@@ -8,9 +8,9 @@
         </el-form-item>
         <el-form-item>
           <div class="login-type">
-            <p :class="`${type1}`" @click="loginType(1)">账号登陆</p>
+            <p :class="`${UserNum}`" @click="loginType(1)">账号登陆</p>
             <p>/</p>
-            <p :class="`${type2}`" @click="loginType(2)">手机号登陆</p>
+            <p :class="`${PhoneNum}`" @click="loginType(2)">手机号登陆</p>
           </div>
         </el-form-item>
         <template v-if="typeCode === 1">
@@ -99,10 +99,10 @@ onMounted(() => {
     }
   }
 })
-const type1 = computed(() => {
+const UserNum = computed(() => {
   return typeCode.value == 1 ? "typeCss" : "";
 });
-const type2 = computed(() => {
+const PhoneNum = computed(() => {
   const { value } = typeCode;
   return value == 1 ? "" : "typeCss";
 });
@@ -111,32 +111,6 @@ const loginType = (code) => {
 };
 
 const login = () => {
-  // let menulist = [{
-  //   path: "/",
-  //   icon: "HomeFilled",
-  //   component: () => import("@/view/baseHtml/index/index.vue"),
-  //   meta: {
-  //     title: "首页"
-  //   },
-  //   children: [{
-  //     path: "home",
-  //     icon: "List",
-  //     component: () => import("@/view/home/index.vue"),
-  //     meta: {
-  //       title: "图表"
-  //     },
-  //   }]
-  // }, {
-  //   path: "/",
-  //   component: () => import("@/view/baseHtml/index/index.vue"),
-  //   meta: {
-  //     title: "系统管理"
-  //   },
-  //   icon: "HomeFilled",
-  //   children: [
-  //    ...sys,
-  //   ]
-  // },]
   let menulist = [{
     path: "/",
     icon: "HomeFilled",
@@ -172,15 +146,11 @@ const login = () => {
     }
     router.addRoute(v);
   })
-
-
-
   MenuList.setMenuList(LeftMenuList(menulist))
- let x=MenuList.getMenuList
+  let x=MenuList.getMenuList
   router.push({
     path: "/",
   })
-  // FormDatas.id = 1234
   // submit(FormDatas)
 }
 const rest = () => {

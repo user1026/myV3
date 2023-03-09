@@ -16,7 +16,6 @@ const userinfo = () => {
     const submit = async (FormDatas) => {
         const usertoken = userToken();
         let token = await post("/login", FormDatas).then(async res => {
-
             window.sessionStorage.setItem("token", res);
             usertoken.setToken(res)
             await getuserinfo(res)
