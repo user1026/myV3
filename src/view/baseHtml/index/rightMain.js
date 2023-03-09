@@ -6,19 +6,14 @@ import {
 import {
   useRouter
 } from 'vue-router';
-import {
-  RouterInfo,
-  leftActive,
-} from "@/store/index.js"
 const rightMain=()=>{
-const tabName = RouterInfo();
-const leftActivePath = leftActive();
 const router = useRouter();
 const tabsValue = ref("");
 const routerList = ref([]);
 const tabsList = ref([]);
 //点击某个标签
 const tabClick = (a, b) => {
+  console.log(a)
   let toPath = tabsList.value.filter(v => {
       return v.name == a.props.name;
   })[0];
@@ -41,6 +36,7 @@ const removeTab = (name) => {
 }
 //添加标签
 const addTabs = (title, path) => {
+  console.log("addtabs",title,path)
   let fList = tabsList.value.filter(val => val.title == title);
   if (fList.length > 0) {
       tabsValue.value = fList[0].name;
@@ -56,9 +52,7 @@ const addTabs = (title, path) => {
   }
 }
 
-watch(() => tabName.getRouterInfo, (now, old) => {
-  routerList.value = now.routeList
-})
+
 return {
   addTabs,
   removeTab,

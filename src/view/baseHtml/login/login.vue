@@ -49,7 +49,7 @@
   </div>
 </template>
 <script setup>
-import { computed, onMounted, reactive, ref, watch,defineAsyncComponent } from "vue";
+import { computed, onMounted, reactive, ref, watch } from "vue";
 import userinfo from "./userinfo"
 import sys from "@/router/sys.js"
 import getCode from "./getcode";
@@ -70,34 +70,17 @@ const FormDatas = reactive({
 const router = useRouter();
 const typeCode = ref(1);
 const remember = ref(false);
-watch(remember, (newval, oldval) => {
-  if (newval === true) {
-    if (FormDatas.username && FormDatas.password) {
-      //window.localStorage.setItem()
-      setUser(FormDatas)
-    }
-  } else {
-    removeUser();
-  }
-})
 let width = ref(1400)
 const loginClass = computed(() => {
   return width.value < 1400 ? "loginForm loginForm1400" : "loginForm"
 })
+
 onMounted(() => {
   width.value = document.documentElement.offsetWidth
   let bool = window.localStorage.getItem("isRemember");
   if (bool == "true") {
-    console.log(bool, "bool")
-    if (window.localStorage.getItem("user")) {
-      let user = window.atob(window.localStorage.getItem("user"));
-      FormDatas.username = user.split("-")[0];
-      FormDatas.password = user.split("-")[1];
-      remember.value = true;
     } else {
-      window.localStorage.setItem("isRemember", false);
     }
-  }
 })
 const UserNum = computed(() => {
   return typeCode.value == 1 ? "typeCss" : "";

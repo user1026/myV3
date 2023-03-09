@@ -13,14 +13,17 @@ import {
 const userinfo = () => {
     //提交
     const submit = async (FormDatas) => {
-        const userInfo = userInfo();
+        const userinfo = userInfo();
         let token = await post("/login", FormDatas).then(async res => {
             window.sessionStorage.setItem("token", res);
-            userInfo.$patch((state)=>{state.token=res});
-            await getuserinfo(res)
-            await getUserMenuList(res)
             return res
         })
+        let user= await getuserinfo(token)
+        userinfo.$patch((state)=>{
+            state.token=token
+            state.userInfo=user
+        });
+        await getUserMenuList(token)
         return token
     };
     //记住密码功能
@@ -33,18 +36,14 @@ const userinfo = () => {
         window.localStorage.removeItem("user");
     }
     const getuserinfo = async (token) => {
-        const userinfo = userInfo();
         let user = await post("/getuserinfo", {
             token
         }).then(res => {
-            console.log(res)
-            userinfo.setuserinfo(res);
             return res;
         })
         return user;
     };
     //获取菜单
-   
     const getUserMenuList = async (token) => {
         let menulist = await post("/getMenuList", {
             token

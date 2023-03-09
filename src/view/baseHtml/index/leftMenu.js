@@ -1,19 +1,9 @@
 import {
   ref,
-  reactive,
-  onMounted,
-  watch,
 } from 'vue'
-import {
-  RouterInfo,
-  leftActive,
-  getMenuList
-} from "@/store/index.js"
-import RightMain from "./rightMain"
+import RightMain from "./rightMain.js"
 const {addTabs} =RightMain();
 const leftMenu=()=>{
-const nowTabName = RouterInfo();
-const leftActivePath = leftActive();
 const isCollapse = ref(false);
 const leftSpan=ref(3);
 const rightSpan=ref(21)
@@ -31,6 +21,7 @@ const changeCollapse=()=>{
 
 }
 const addRightTabs = (title, path) => {
+  console.log("123")
   addTabs(title,path);
   return {
       title,
@@ -38,20 +29,17 @@ const addRightTabs = (title, path) => {
   }
 }
 const handleOpen=()=>{}
-//监听右侧点击的路由激活对应的菜单
-watch(() => nowTabName.getRouterInfo, (now, old) => {
-  defaultPath.value = now.path;
-})
+
+
 return {
   leftSpan,
   rightSpan,
- leftActivePath ,
  isCollapse,
  menuList,
  defaultPath,
   changeCollapse,
   addRightTabs,
-  nowTabName,
+
   handleOpen,
 }
 }

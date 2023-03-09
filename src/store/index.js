@@ -1,27 +1,10 @@
 import {
     defineStore
 } from "pinia"
-export const userToken = defineStore("userToken", {
-    state: () => {
-        return {
-            token: ""
-        }
-    },
-    actions: {
-        setToken(val) {
-            this.token = val;
-        }
-    },
-    getters: {
-        getToken() {
-            return this.token;
-        }
-    }
-})
 export const userInfo = defineStore("userInfo", {
     state: () => {
         return {
-            userName:"",
+            userInfo:{},
             token:"",
         }
     }
@@ -43,25 +26,6 @@ export const RouterInfo = defineStore("RouterInfo", {
     getters: {
         getRouterInfo() {
             return this.routerInfo;
-        },
-
-    },
-})
-export const leftActive = defineStore("leftActive", {
-    state: () => {
-        return {
-            leftActivePath: "",
-        }
-    },
-    actions: {
-        setLeftActivePath(val) {
-
-            this.leftActivePath = val;
-        }
-    },
-    getters: {
-        getLeftActivePath() {
-            return this.leftActivePath;
         },
 
     },

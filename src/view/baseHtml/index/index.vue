@@ -15,26 +15,29 @@
 } from "@/store/index.js"
     import LeftMenu from "./leftMenu.js";
     import RightMain from "./rightMain.js";
-    const {nowTabName,isCollapse,handleOpen ,leftSpan,rightSpan,menuList,defaultPath,changeCollapse,addRightTabs} =LeftMenu();
-    const {addTabs,removeTab,tabClick,tabsList,tabsValue,routerList} =RightMain();
+    const {nowTabName,isCollapse,handleOpen ,leftSpan,rightSpan,menuList,defaultPath,changeCollapse} =LeftMenu();
+    const {addTabs,removeTab,tabClick,tabsList,tabName ,tabsValue,routerList} =RightMain();
     const MenuList = getMenuList();
     const username = ref("123")
-    //const leftWidth = ref("300px");
     const router = useRouter();
+    const TabName=RouterInfo();
     //退出
     const logout = () => {
-       // window.localStorage.clear();
         window.sessionStorage.clear();
         router.push("/login")
     }
+    const addRightTabs=(title,path)=>{
+        addTabs(title,path);
+    }
     onMounted(() => {
-  menuList.value = MenuList.getMenuList;
+            menuList.value = MenuList.getMenuList;
+    })
+    //监听右侧点击的路由激活对应的菜单
+watch(() => TabName.getRouterInfo, (now, old) => {
+  routerList.value = now.routeList
+  defaultPath.value = now.path;
 })
-
 </script>
-
-
-
 <template>
     <div class="common-layout">
         <el-row :gutter="0">
@@ -74,7 +77,7 @@
                                     </el-sub-menu>
                                 </template>
                                 <template v-else>
-                                    <el-menu-item :index="item.path" @click="addTabs(item.title, item.path)">
+                                    <el-menu-item :index="item.path" @click="addRightTabs(item.title, item.path)">
                                         <template #title>
                                             <div>
                                                 <el-icon>
